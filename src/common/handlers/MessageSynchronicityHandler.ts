@@ -7,7 +7,7 @@ import {
 } from '../OcppHandlers';
 import { OcppSessionService } from '../session';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
-import { InboundOcppCall } from '../OcppCallMessage';
+import { InboundOcppCall } from '../call';
 import { OutboundOcppCallError } from '../OcppCallErrorMessage';
 import OcppMessageType from '../../types/ocpp/OcppMessageType';
 

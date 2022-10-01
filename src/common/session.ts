@@ -1,4 +1,4 @@
-import { InboundOcppCall, OutboundOcppCall } from './OcppCallMessage';
+import { InboundOcppCall, OutboundOcppCall } from './call';
 import OcppProtocolVersion from '../types/ocpp/OcppProtocolVersion';
 
 class OcppSession {

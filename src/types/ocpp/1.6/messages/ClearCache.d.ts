@@ -1,4 +1,4 @@
-import { OutboundOcppCall } from '../../../../common/OcppCallMessage';
+import { OutboundOcppCall } from '../../../../common/call';
 import { InboundOcppCallResult } from '../../../../common/OcppCallResultMessage';
 
 declare type ClearCacheRequest = OutboundOcppCall<

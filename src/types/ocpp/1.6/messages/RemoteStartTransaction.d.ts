@@ -1,4 +1,4 @@
-import { OutboundOcppCall } from '../../../../common/OcppCallMessage';
+import { OutboundOcppCall } from '../../../../common/call';
 import { InboundOcppCallResult } from '../../../../common/OcppCallResultMessage';
 import IdToken from '../structs/IdToken';
 import ChargingProfile from '../structs/ChargingProfile';

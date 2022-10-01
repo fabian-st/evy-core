@@ -13,7 +13,7 @@ import merge from 'lodash.merge';
 
 import OcppEndpoint, { OcppEndpointConfig } from '../common/endpoint';
 import { OcppClient, OcppSessionService } from '../common/session';
-import { InboundOcppCall, OutboundOcppCall } from '../common/OcppCallMessage';
+import { InboundOcppCall, OutboundOcppCall } from '../common/call';
 
 import {
   InboundOcppCallResult,

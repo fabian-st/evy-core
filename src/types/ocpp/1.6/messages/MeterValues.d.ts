@@ -1,4 +1,4 @@
-import { InboundOcppCall } from '../../../../common/OcppCallMessage';
+import { InboundOcppCall } from '../../../../common/call';
 import { OutboundOcppCallResult } from '../../../../common/OcppCallResultMessage';
 import MeterValue from '../structs/MeterValue';
 

@@ -4,7 +4,7 @@ import { oneLine } from 'common-tags';
 import { OcppEndpointConfig } from '../endpoint';
 import OcppMessageType from '../../types/ocpp/OcppMessageType';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
-import { InboundOcppCall, OutboundOcppCall } from '../OcppCallMessage';
+import { InboundOcppCall, OutboundOcppCall } from '../call';
 import { OutboundOcppCallError } from '../OcppCallErrorMessage';
 import {
   InboundOcppMessageHandler,
