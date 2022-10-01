@@ -1,9 +1,6 @@
 import { AsyncHandler } from './util/handler';
 import { OcppClient } from './session';
-import OcppMessage, {
-  InboundOcppMessage,
-  OutboundOcppMessage,
-} from './message';
+import OcppMessage, { InboundOcppMessage, OutboundMessage } from './message';
 import OcppProtocolVersion from '../types/ocpp/protocol-version';
 
 abstract class OcppAuthenticationHandler<
@@ -71,10 +68,10 @@ abstract class InboundMessageHandler<
 > extends OcppMessageHandler<TMessage> {}
 
 abstract class OutboundMessageHandler<
-  TMessage extends OutboundOcppMessage = OutboundOcppMessage
+  TMessage extends OutboundMessage = OutboundMessage
 > extends OcppMessageHandler<TMessage> {}
 
-type ResponseHandler<TResponse extends OutboundOcppMessage> = (
+type ResponseHandler<TResponse extends OutboundMessage> = (
   response: TResponse
 ) => Promise<void>;
 

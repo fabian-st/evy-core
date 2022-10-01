@@ -34,7 +34,7 @@ import OcppAction from '../types/ocpp/action';
 import {
   InboundOcppMessage,
   OcppMessagePayload,
-  OutboundOcppMessage,
+  OutboundMessage,
 } from '../common/message';
 
 import {
@@ -105,7 +105,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
   }
 
   protected get sendMessageHandler() {
-    const handleSend = async (message: OutboundOcppMessage) => {
+    const handleSend = async (message: OutboundMessage) => {
       const ws = this.getSocket(message.recipient.id);
       const session = await this.sessionService.get(message.recipient.id);
 
@@ -151,7 +151,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
     };
 
     return new (class extends OutboundMessageHandler {
-      async handle(message: OutboundOcppMessage) {
+      async handle(message: OutboundMessage) {
         await handleSend(message);
         return await super.handle(message);
       }
@@ -386,7 +386,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
         }
       }
 
-      const responseHandler = async (response: OutboundOcppMessage) => {
+      const responseHandler = async (response: OutboundMessage) => {
         await this.sendMessage(response);
       };
 

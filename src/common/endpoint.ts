@@ -14,7 +14,7 @@ import winstonLogger from './util/logger';
 import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/session-local';
 import OcppMessageType from '../types/ocpp/message-type';
-import { InboundOcppMessage, OutboundOcppMessage } from './message';
+import { InboundOcppMessage, OutboundMessage } from './message';
 import { OutboundOcppCallError } from './callerror';
 import OcppAction, { OcppActions } from '../types/ocpp/action';
 import * as Handlers from './handlers';
@@ -52,7 +52,7 @@ type OcppEndpointEvents = {
   client_connected: (client: OcppClient) => void;
   client_rejected: (client: OcppClient) => void;
   client_disconnected: (client: OcppClient) => void;
-  message_sent: (message: OutboundOcppMessage) => void;
+  message_sent: (message: OutboundMessage) => void;
   message_received: (message: InboundOcppMessage) => void;
 };
 
@@ -219,7 +219,7 @@ abstract class OcppEndpoint<
     console.dir(process.env);
   }
 
-  protected async sendMessage(message: OutboundOcppMessage) {
+  protected async sendMessage(message: OutboundMessage) {
     if (!this.isListening) {
       this.logger.warn(
         oneLine`sendMessage() was called but endpoint is

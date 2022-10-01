@@ -4,7 +4,7 @@ import OcppAction from '../types/ocpp/action';
 import OcppMessage, {
   OcppMessagePayload,
   InboundOcppMessage,
-  OutboundOcppMessage,
+  OutboundMessage,
 } from './message';
 
 type RPCError =
@@ -53,7 +53,7 @@ class InboundOcppCallError
 }
 
 class OutboundOcppCallError
-  extends OutboundOcppMessage
+  extends OutboundMessage
   implements OcppCallErrorMessage
 {
   readonly type: OcppMessageType.CALLERROR;

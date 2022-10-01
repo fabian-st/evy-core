@@ -4,7 +4,7 @@ import OcppAction from '../types/ocpp/action';
 import OcppMessage, {
   OcppMessagePayload,
   InboundOcppMessage,
-  OutboundOcppMessage,
+  OutboundMessage,
 } from './message';
 
 interface OcppCallResultMessage<
@@ -34,7 +34,7 @@ class InboundOcppCallResult<
 class OutboundOcppCallResult<
     TPayload extends OcppMessagePayload = OcppMessagePayload
   >
-  extends OutboundOcppMessage
+  extends OutboundMessage
   implements OcppCallResultMessage<TPayload>
 {
   readonly type: OcppMessageType.CALLRESULT;

@@ -3,7 +3,7 @@ import { oneLine } from 'common-tags';
 
 import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { OcppSessionService } from '../session';
-import { InboundOcppMessage, OutboundOcppMessage } from '../message';
+import { InboundOcppMessage, OutboundMessage } from '../message';
 import { InboundOcppCall } from '../call';
 import { OutboundOcppCallError } from '../callerror';
 import OcppMessageType from '../../types/ocpp/message-type';
@@ -89,7 +89,7 @@ class OutboundMessageSynchronicityHandler extends OutboundMessageHandler {
     this._sessionService = sessionService;
   }
 
-  async handle(message: OutboundOcppMessage) {
+  async handle(message: OutboundMessage) {
     return await super.handle(message);
   }
 }
