@@ -70,7 +70,7 @@ abstract class InboundMessageHandler<
   TMessage extends InboundOcppMessage = InboundOcppMessage
 > extends OcppMessageHandler<TMessage> {}
 
-abstract class OutboundOcppMessageHandler<
+abstract class OutboundMessageHandler<
   TMessage extends OutboundOcppMessage = OutboundOcppMessage
 > extends OcppMessageHandler<TMessage> {}
 
@@ -83,6 +83,6 @@ export {
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
   InboundMessageHandler,
-  OutboundOcppMessageHandler,
+  OutboundMessageHandler,
   ResponseHandler,
 };

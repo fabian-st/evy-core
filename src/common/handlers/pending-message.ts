@@ -1,4 +1,4 @@
-import { InboundMessageHandler, OutboundOcppMessageHandler } from '../handler';
+import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { OcppSessionService } from '../session';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
 import { InboundOcppCall, OutboundOcppCall } from '../call';
@@ -33,7 +33,7 @@ class InboundPendingMessageHandler extends InboundMessageHandler {
   }
 }
 
-class OutboundPendingMessageHandler extends OutboundOcppMessageHandler {
+class OutboundPendingMessageHandler extends OutboundMessageHandler {
   private sessionService;
 
   constructor(sessionService: OcppSessionService) {

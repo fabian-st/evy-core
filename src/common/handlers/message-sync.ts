@@ -1,7 +1,7 @@
 import { Logger } from 'ts-log';
 import { oneLine } from 'common-tags';
 
-import { InboundMessageHandler, OutboundOcppMessageHandler } from '../handler';
+import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { OcppSessionService } from '../session';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
 import { InboundOcppCall } from '../call';
@@ -81,7 +81,7 @@ class InboundMessageSynchronicityHandler extends InboundMessageHandler {
   }
 }
 
-class OutboundMessageSynchronicityHandler extends OutboundOcppMessageHandler {
+class OutboundMessageSynchronicityHandler extends OutboundMessageHandler {
   private _sessionService;
 
   constructor(sessionService: OcppSessionService) {

@@ -6,7 +6,7 @@ import OcppMessageType from '../../types/ocpp/message-type';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
 import { InboundOcppCall, OutboundOcppCall } from '../call';
 import { OutboundOcppCallError } from '../callerror';
-import { InboundMessageHandler, OutboundOcppMessageHandler } from '../handler';
+import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 
 class InboundActionsAllowedHandler extends InboundMessageHandler {
   private config: OcppEndpointConfig;
@@ -40,7 +40,7 @@ class InboundActionsAllowedHandler extends InboundMessageHandler {
   }
 }
 
-class OutboundActionsAllowedHandler extends OutboundOcppMessageHandler {
+class OutboundActionsAllowedHandler extends OutboundMessageHandler {
   private config: OcppEndpointConfig;
   private logger: Logger;
 

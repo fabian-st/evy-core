@@ -41,7 +41,7 @@ import {
   InboundMessageHandler,
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
-  OutboundOcppMessageHandler,
+  OutboundMessageHandler,
 } from '../common/handler';
 
 type WebSocketConfig = OcppEndpointConfig & {
@@ -63,7 +63,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
     config: WebSocketConfig,
     authenticationHandlers: OcppAuthenticationHandler[],
     inboundMessageHandlers: InboundMessageHandler[],
-    outboundMessageHandlers?: OutboundOcppMessageHandler[],
+    outboundMessageHandlers?: OutboundMessageHandler[],
     sessionService?: OcppSessionService,
     logger?: Logger
   ) {
@@ -150,12 +150,12 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
       ws.send(JSON.stringify(messageArr));
     };
 
-    return new (class extends OutboundOcppMessageHandler {
+    return new (class extends OutboundMessageHandler {
       async handle(message: OutboundOcppMessage) {
         await handleSend(message);
         return await super.handle(message);
       }
-    })() as OutboundOcppMessageHandler;
+    })() as OutboundMessageHandler;
   }
 
   public hasSession(clientId: string) {
