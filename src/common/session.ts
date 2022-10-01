@@ -1,7 +1,7 @@
 import { InboundCall, OutboundCall } from './call';
 import ProtocolVersion from '../types/ocpp/version';
 
-class OcppSession {
+class Session {
   private _isActiveHandler: () => boolean;
   private _dropHandler: () => void;
 
@@ -59,12 +59,12 @@ interface SessionService {
   create(): Promise<void>;
   destroy(): Promise<void>;
   count(): Promise<number>;
-  add(sesion: OcppSession): Promise<void>;
+  add(sesion: Session): Promise<void>;
   has(clientId: string): Promise<boolean>;
-  get(clientId: string): Promise<OcppSession | null>;
-  update(clientId: string, session: OcppSession): Promise<void>;
+  get(clientId: string): Promise<Session | null>;
+  update(clientId: string, session: Session): Promise<void>;
   remove(clientId: string): Promise<void>;
 }
 
-export default OcppSession;
+export default Session;
 export { OcppClient, SessionService };

@@ -11,7 +11,7 @@ import { oneLine } from 'common-tags';
 import merge from 'lodash.merge';
 
 import winstonLogger from './util/logger';
-import OcppSession, { OcppClient, SessionService } from './session';
+import Session, { OcppClient, SessionService } from './session';
 import LocalSessionService from './services/session-local';
 import MessageType from '../types/ocpp/type';
 import { InboundMessage, OutboundMessage } from './message';
@@ -280,7 +280,7 @@ abstract class OcppEndpoint<
       return;
     }
 
-    const session = new OcppSession(
+    const session = new Session(
       request.client,
       request.protocol,
       () => this.hasSession(request.client.id),
