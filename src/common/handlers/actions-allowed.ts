@@ -2,7 +2,7 @@ import { Logger } from 'ts-log';
 import { oneLine } from 'common-tags';
 
 import { OcppEndpointConfig } from '../endpoint';
-import OcppMessageType from '../../types/ocpp/message-type';
+import MessageType from '../../types/ocpp/type';
 import { InboundMessage, OutboundMessage } from '../message';
 import { InboundCall, OutboundCall } from '../call';
 import { OutboundCallError } from '../callerror';
@@ -24,7 +24,7 @@ class InboundActionsAllowedHandler extends InboundMessageHandler {
       !this.config.actionsAllowed.includes(message.action)
     ) {
       this.logger.warn(
-        oneLine`Received ${OcppMessageType[message.type]}
+        oneLine`Received ${MessageType[message.type]}
         message with unsupported action: ${message.action}`
       );
 
@@ -56,7 +56,7 @@ class OutboundActionsAllowedHandler extends OutboundMessageHandler {
       !this.config.actionsAllowed.includes(message.action)
     ) {
       this.logger.warn(
-        oneLine`Attempted to send ${OcppMessageType[message.type]}
+        oneLine`Attempted to send ${MessageType[message.type]}
         message with unsupported action: ${message.action}`
       );
       return;

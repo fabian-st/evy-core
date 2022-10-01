@@ -20,7 +20,7 @@ import { InboundCallResult, OutboundCallResult } from '../common/callresult';
 import { InboundCallError, OutboundCallError } from '../common/callerror';
 
 import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
-import OcppMessageType from '../types/ocpp/message-type';
+import MessageType from '../types/ocpp/type';
 import OcppAction from '../types/ocpp/action';
 
 import { InboundMessage, OutboundMessage, Payload } from '../common/message';
@@ -123,14 +123,14 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
 
         if (!messageValidation?.valid) {
           this.logger.warn(
-            oneLine`Outbound ${OcppMessageType[message.type]}
+            oneLine`Outbound ${MessageType[message.type]}
             message payload is not valid`
           );
           this.logger.trace(messageValidation.errors);
           return;
         } else {
           this.logger.debug(
-            `Outbound ${OcppMessageType[message.type]} message payload is valid`
+            `Outbound ${MessageType[message.type]} message payload is valid`
           );
         }
       }
@@ -352,7 +352,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
 
       if (
         this.config.schemaValidation &&
-        (type === OcppMessageType.CALL || type === OcppMessageType.CALLRESULT)
+        (type === MessageType.CALL || type === MessageType.CALLRESULT)
       ) {
         const messageValidation = await this.validateSchema(
           type,
@@ -363,13 +363,13 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
 
         if (!messageValidation?.valid) {
           this.logger.warn(
-            `Inbound ${OcppMessageType[type]} message payload is not valid`
+            `Inbound ${MessageType[type]} message payload is not valid`
           );
           this.logger.trace(messageValidation.errors);
           return;
         } else {
           this.logger.debug(
-            `Inbound ${OcppMessageType[type]} message payload is valid`
+            `Inbound ${MessageType[type]} message payload is valid`
           );
         }
       }
@@ -380,7 +380,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
 
       let message: InboundMessage;
       switch (type) {
-        case OcppMessageType.CALL:
+        case MessageType.CALL:
           message = new InboundCall(
             client,
             id,
@@ -390,11 +390,11 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
           );
           break;
 
-        case OcppMessageType.CALLRESULT:
+        case MessageType.CALLRESULT:
           message = new InboundCallResult(client, id, payload);
           break;
 
-        case OcppMessageType.CALLERROR:
+        case MessageType.CALLERROR:
           message = new InboundCallError(
             client,
             id,
@@ -432,14 +432,14 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
     const type: number = message[0];
     if (
       typeof type !== 'number' ||
-      !Object.values(OcppMessageType).includes(type)
+      !Object.values(MessageType).includes(type)
     ) {
       throw new Error('Missing or invalid type field');
     }
 
-    const isCallMessage = type === OcppMessageType.CALL;
-    const isCallResultMessage = type === OcppMessageType.CALLRESULT;
-    const isCallErrorMessage = type === OcppMessageType.CALLERROR;
+    const isCallMessage = type === MessageType.CALL;
+    const isCallResultMessage = type === MessageType.CALLRESULT;
+    const isCallErrorMessage = type === MessageType.CALLERROR;
 
     const id: string = message[1];
     if (typeof id !== 'string') {
@@ -479,7 +479,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
   }
 
   protected async validateSchema(
-    type: OcppMessageType.CALL | OcppMessageType.CALLRESULT,
+    type: MessageType.CALL | MessageType.CALLRESULT,
     action: OcppAction,
     payload: Payload,
     protocol: ProtocolVersion
@@ -489,12 +489,12 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
     let schemaMap: Map<OcppAction, Record<string, any>>;
 
     switch (type) {
-      case OcppMessageType.CALL:
+      case MessageType.CALL:
         schemaType = 'request';
         schemaMap = this.requestSchemas;
         break;
 
-      case OcppMessageType.CALLRESULT:
+      case MessageType.CALLRESULT:
         schemaType = 'response';
         schemaMap = this.responseSchemas;
         break;

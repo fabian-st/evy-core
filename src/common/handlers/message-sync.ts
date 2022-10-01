@@ -6,7 +6,7 @@ import { OcppSessionService } from '../session';
 import { InboundMessage, OutboundMessage } from '../message';
 import { InboundCall } from '../call';
 import { OutboundCallError } from '../callerror';
-import OcppMessageType from '../../types/ocpp/message-type';
+import MessageType from '../../types/ocpp/type';
 
 class InboundMessageSynchronicityHandler extends InboundMessageHandler {
   private sessionService;
@@ -35,7 +35,7 @@ class InboundMessageSynchronicityHandler extends InboundMessageHandler {
     ) {
       error = true;
       this.logger.warn(
-        oneLine`Received ${OcppMessageType[message.type]} message
+        oneLine`Received ${MessageType[message.type]} message
         which is out of sync with pending outbound CALL message`
       );
     }
@@ -47,7 +47,7 @@ class InboundMessageSynchronicityHandler extends InboundMessageHandler {
     if (!session.pendingOutboundMessage && !(message instanceof InboundCall)) {
       error = true;
       this.logger.warn(
-        oneLine`Received ${OcppMessageType[message.type]} message
+        oneLine`Received ${MessageType[message.type]} message
         while there is no pending outbound CALL message`
       );
     }

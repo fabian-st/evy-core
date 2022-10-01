@@ -1,5 +1,5 @@
 import { OcppClient } from './session';
-import OcppMessageType from '../types/ocpp/message-type';
+import MessageType from '../types/ocpp/type';
 import OcppAction from '../types/ocpp/action';
 import { InboundCallResult, OutboundCallResult } from './callresult';
 import OcppMessage, {
@@ -13,7 +13,7 @@ interface OcppCallMessage<
   TAction extends OcppAction = OcppAction,
   TPayload extends Payload = Payload
 > extends OcppMessage {
-  readonly type: OcppMessageType.CALL;
+  readonly type: MessageType.CALL;
   action: TAction;
   data: TPayload;
 }
@@ -27,7 +27,7 @@ class InboundCall<
   extends RespondableOcppMessage<TResponse>
   implements OcppCallMessage<TAction, TPayload>
 {
-  type: OcppMessageType.CALL;
+  type: MessageType.CALL;
   action: TAction;
   data: TPayload;
 
@@ -39,7 +39,7 @@ class InboundCall<
     responseHandler?: ResponseHandler<TResponse>
   ) {
     super(sender, id, responseHandler);
-    this.type = OcppMessageType.CALL;
+    this.type = MessageType.CALL;
     this.action = action;
     this.data = data;
   }
@@ -54,7 +54,7 @@ class OutboundCall<
   extends ResultingOcppMessage<TResponse>
   implements OcppCallMessage<TAction, TPayload>
 {
-  type: OcppMessageType.CALL;
+  type: MessageType.CALL;
   action: TAction;
   data: TPayload;
 
@@ -66,7 +66,7 @@ class OutboundCall<
     responseHandler?: InboundMessageHandler<TResponse>
   ) {
     super(recipient, id, responseHandler);
-    this.type = OcppMessageType.CALL;
+    this.type = MessageType.CALL;
     this.action = action;
     this.data = data;
   }

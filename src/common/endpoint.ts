@@ -13,7 +13,7 @@ import merge from 'lodash.merge';
 import winstonLogger from './util/logger';
 import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/session-local';
-import OcppMessageType from '../types/ocpp/message-type';
+import MessageType from '../types/ocpp/type';
 import { InboundMessage, OutboundMessage } from './message';
 import { OutboundCallError } from './callerror';
 import OcppAction, { OcppActions } from '../types/ocpp/action';
@@ -235,7 +235,7 @@ abstract class OcppEndpoint<
     }
 
     this.logger.debug(
-      oneLine`Sending ${OcppMessageType[message.type]}
+      oneLine`Sending ${MessageType[message.type]}
       to client with id ${message.recipient.id}`
     );
     this.logger.trace(message);
@@ -244,7 +244,7 @@ abstract class OcppEndpoint<
     message.setSent();
 
     this.logger.debug(
-      oneLine`${OcppMessageType[message.type]} message to
+      oneLine`${MessageType[message.type]} message to
       client with id ${message.recipient.id} was sent`
     );
     this.emit('message_sent', message);
@@ -311,7 +311,7 @@ abstract class OcppEndpoint<
 
   protected async onInboundMessage(message: InboundMessage) {
     this.logger.debug(
-      oneLine`Received ${OcppMessageType[message.type]}
+      oneLine`Received ${MessageType[message.type]}
       message from client with id ${message.sender.id}`
     );
     this.logger.trace(message);
@@ -325,7 +325,7 @@ abstract class OcppEndpoint<
       } else {
         this.logger.error(
           `Error occured while handling inbound
-          ${OcppMessageType[message.type]} message`
+          ${MessageType[message.type]} message`
         );
         this.logger.trace(err.stack);
       }

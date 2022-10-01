@@ -1,4 +1,4 @@
-import OcppMessageType from '../types/ocpp/message-type';
+import MessageType from '../types/ocpp/type';
 import { OcppClient } from './session';
 import { InboundMessageHandler, ResponseHandler } from './handler';
 
@@ -13,7 +13,7 @@ type OcppMessageValue =
 type Payload = OcppMessageValue | null | {};
 
 abstract class OcppMessage {
-  readonly type!: OcppMessageType;
+  readonly type!: MessageType;
   readonly id: string;
   protected _timestamp?: Date;
 

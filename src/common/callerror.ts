@@ -1,5 +1,5 @@
 import { OcppClient } from './session';
-import OcppMessageType from '../types/ocpp/message-type';
+import MessageType from '../types/ocpp/type';
 import OcppAction from '../types/ocpp/action';
 import OcppMessage, {
   Payload,
@@ -22,14 +22,14 @@ type RPCError =
   | 'TypeConstraintViolation';
 
 interface OcppCallErrorMessage extends OcppMessage {
-  readonly type: OcppMessageType.CALLERROR;
+  readonly type: MessageType.CALLERROR;
   code: RPCError;
   description: string;
   details: Payload;
 }
 
 class InboundCallError extends InboundMessage implements OcppCallErrorMessage {
-  readonly type: OcppMessageType.CALLERROR;
+  readonly type: MessageType.CALLERROR;
   code: RPCError;
   description: string;
   details: Payload;
@@ -42,7 +42,7 @@ class InboundCallError extends InboundMessage implements OcppCallErrorMessage {
     details: Payload = {}
   ) {
     super(sender, id);
-    this.type = OcppMessageType.CALLERROR;
+    this.type = MessageType.CALLERROR;
     this.code = code;
     this.description = description;
     this.details = details;
@@ -53,7 +53,7 @@ class OutboundCallError
   extends OutboundMessage
   implements OcppCallErrorMessage
 {
-  readonly type: OcppMessageType.CALLERROR;
+  readonly type: MessageType.CALLERROR;
   code: RPCError;
   description: string;
   details: Payload;
@@ -66,7 +66,7 @@ class OutboundCallError
     details: Payload = {}
   ) {
     super(recipient, id);
-    this.type = OcppMessageType.CALLERROR;
+    this.type = MessageType.CALLERROR;
     this.code = code;
     this.description = description;
     this.details = details;
