@@ -1,7 +1,7 @@
-import { OutboundOcppCall } from '../../../../common/call';
+import { OutboundCall } from '../../../../common/call';
 import { InboundCallResult } from '../../../../common/callresult';
 
-declare type ResetRequest = OutboundOcppCall<
+declare type ResetRequest = OutboundCall<
   'Reset',
   ResetRequestPayload,
   ResetResponsePayload,

@@ -1,4 +1,4 @@
-import { InboundCall, OutboundOcppCall } from './call';
+import { InboundCall, OutboundCall } from './call';
 import OcppProtocolVersion from '../types/ocpp/protocol-version';
 
 class OcppSession {
@@ -8,7 +8,7 @@ class OcppSession {
   readonly client: OcppClient;
   readonly protocol: OcppProtocolVersion;
   pendingInboundMessage?: InboundCall;
-  pendingOutboundMessage?: OutboundOcppCall;
+  pendingOutboundMessage?: OutboundCall;
 
   constructor(
     client: OcppClient,

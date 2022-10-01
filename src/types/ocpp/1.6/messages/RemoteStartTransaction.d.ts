@@ -1,10 +1,10 @@
-import { OutboundOcppCall } from '../../../../common/call';
+import { OutboundCall } from '../../../../common/call';
 import { InboundCallResult } from '../../../../common/callresult';
 import IdToken from '../structs/IdToken';
 import ChargingProfile from '../structs/ChargingProfile';
 import RemoteStartStopStatus from '../structs/RemoteStartStopStatus';
 
-declare type RemoteStartTransactionRequest = OutboundOcppCall<
+declare type RemoteStartTransactionRequest = OutboundCall<
   'RemoteStartTransaction',
   RemoteStartTransactionRequestPayload,
   RemoteStartTransactionResponsePayload,

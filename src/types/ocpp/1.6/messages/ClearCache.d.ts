@@ -1,7 +1,7 @@
-import { OutboundOcppCall } from '../../../../common/call';
+import { OutboundCall } from '../../../../common/call';
 import { InboundCallResult } from '../../../../common/callresult';
 
-declare type ClearCacheRequest = OutboundOcppCall<
+declare type ClearCacheRequest = OutboundCall<
   'ClearCache',
   null,
   ClearCacheResponsePayload,

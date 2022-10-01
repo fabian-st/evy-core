@@ -13,7 +13,7 @@ import merge from 'lodash.merge';
 
 import OcppEndpoint, { OcppEndpointConfig } from '../common/endpoint';
 import { OcppClient, OcppSessionService } from '../common/session';
-import { InboundCall, OutboundOcppCall } from '../common/call';
+import { InboundCall, OutboundCall } from '../common/call';
 
 import { InboundCallResult, OutboundCallResult } from '../common/callresult';
 
@@ -100,7 +100,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
       const session = await this.sessionService.get(message.recipient.id);
 
       const messageArr: any[] = [message.type, message.id];
-      if (message instanceof OutboundOcppCall) {
+      if (message instanceof OutboundCall) {
         messageArr.push(message.action, message.data);
       } else if (message instanceof OutboundCallResult) {
         messageArr.push(message.data);
@@ -110,7 +110,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
 
       if (
         this.config.schemaValidation &&
-        (message instanceof OutboundOcppCall ||
+        (message instanceof OutboundCall ||
           message instanceof OutboundCallResult)
       ) {
         const dateToString = (key: string, value: string) => value;

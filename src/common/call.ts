@@ -45,7 +45,7 @@ class InboundCall<
   }
 }
 
-class OutboundOcppCall<
+class OutboundCall<
     TAction extends OcppAction = OcppAction,
     TPayload extends Payload = Payload,
     TResponsePayload extends Payload = Payload,
@@ -73,4 +73,4 @@ class OutboundOcppCall<
 }
 
 export default OcppCallMessage;
-export { InboundCall, OutboundOcppCall };
+export { InboundCall, OutboundCall };

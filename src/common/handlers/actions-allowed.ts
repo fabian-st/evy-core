@@ -4,7 +4,7 @@ import { oneLine } from 'common-tags';
 import { OcppEndpointConfig } from '../endpoint';
 import OcppMessageType from '../../types/ocpp/message-type';
 import { InboundMessage, OutboundMessage } from '../message';
-import { InboundCall, OutboundOcppCall } from '../call';
+import { InboundCall, OutboundCall } from '../call';
 import { OutboundCallError } from '../callerror';
 import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 
@@ -52,7 +52,7 @@ class OutboundActionsAllowedHandler extends OutboundMessageHandler {
 
   async handle(message: OutboundMessage) {
     if (
-      message instanceof OutboundOcppCall &&
+      message instanceof OutboundCall &&
       !this.config.actionsAllowed.includes(message.action)
     ) {
       this.logger.warn(
