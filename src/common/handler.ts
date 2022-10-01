@@ -1,5 +1,5 @@
 import { AsyncHandler } from './util/handler';
-import { OcppClient } from './session';
+import { Client } from './session';
 import OcppMessage, { InboundMessage, OutboundMessage } from './message';
 import ProtocolVersion from '../types/ocpp/version';
 
@@ -12,7 +12,7 @@ abstract class AuthenticationRequest {
   private _rejected: boolean;
   private _protocol: ProtocolVersion;
 
-  readonly client: OcppClient;
+  readonly client: Client;
   readonly protocols: ProtocolVersion[];
   readonly password?: string;
   readonly certificate?: unknown;

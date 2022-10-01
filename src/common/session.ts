@@ -5,13 +5,13 @@ class Session {
   private _isActiveHandler: () => boolean;
   private _dropHandler: () => void;
 
-  readonly client: OcppClient;
+  readonly client: Client;
   readonly protocol: ProtocolVersion;
   pendingInboundMessage?: InboundCall;
   pendingOutboundMessage?: OutboundCall;
 
   constructor(
-    client: OcppClient,
+    client: Client,
     protocol: ProtocolVersion,
     isActiveHandler?: () => boolean,
     dropHandler?: () => void
@@ -47,7 +47,7 @@ class Session {
   }
 }
 
-class OcppClient {
+class Client {
   readonly id: string;
 
   constructor(id: string) {
@@ -67,4 +67,4 @@ interface SessionService {
 }
 
 export default Session;
-export { OcppClient, SessionService };
+export { Client, SessionService };

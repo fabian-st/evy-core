@@ -1,4 +1,4 @@
-import { OcppClient } from './session';
+import { Client } from './session';
 import MessageType from '../types/ocpp/type';
 import OcppAction from '../types/ocpp/action';
 import { InboundCallResult, OutboundCallResult } from './callresult';
@@ -32,7 +32,7 @@ class InboundCall<
   data: TPayload;
 
   constructor(
-    sender: OcppClient,
+    sender: Client,
     id: string,
     action: TAction,
     data: TPayload,
@@ -59,7 +59,7 @@ class OutboundCall<
   data: TPayload;
 
   constructor(
-    recipient: OcppClient,
+    recipient: Client,
     id: string,
     action: TAction,
     data: TPayload,

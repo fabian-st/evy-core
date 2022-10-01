@@ -12,7 +12,7 @@ import basicAuth from 'basic-auth';
 import merge from 'lodash.merge';
 
 import OcppEndpoint, { OcppEndpointConfig } from '../common/endpoint';
-import { OcppClient, SessionService } from '../common/session';
+import { Client, SessionService } from '../common/session';
 import { InboundCall, OutboundCall } from '../common/call';
 
 import { InboundCallResult, OutboundCallResult } from '../common/callresult';
@@ -195,7 +195,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
     const { id, password, protocols } = requestProperties;
 
     const authRequest = new (class extends AuthenticationRequest {
-      client = new OcppClient(id);
+      client = new Client(id);
       protocols = protocols;
       password = password ?? undefined;
 
@@ -307,7 +307,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
   protected onWsConnected = (
     ws: WebSocket,
     request: HTTPRequest,
-    client: OcppClient
+    client: Client
   ) => {
     ws.on('message', async (data, isBinary) => {
       if (isBinary) {

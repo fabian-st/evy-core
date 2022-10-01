@@ -1,4 +1,4 @@
-import { OcppClient } from './session';
+import { Client } from './session';
 import MessageType from '../types/ocpp/type';
 import OcppAction from '../types/ocpp/action';
 import OcppMessage, {
@@ -35,7 +35,7 @@ class InboundCallError extends InboundMessage implements OcppCallErrorMessage {
   details: Payload;
 
   constructor(
-    sender: OcppClient,
+    sender: Client,
     id: string,
     code: RPCError = 'GenericError',
     description = '',
@@ -59,7 +59,7 @@ class OutboundCallError
   details: Payload;
 
   constructor(
-    recipient: OcppClient,
+    recipient: Client,
     id: string,
     code: RPCError = 'GenericError',
     description = '',

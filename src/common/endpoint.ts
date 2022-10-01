@@ -11,7 +11,7 @@ import { oneLine } from 'common-tags';
 import merge from 'lodash.merge';
 
 import winstonLogger from './util/logger';
-import Session, { OcppClient, SessionService } from './session';
+import Session, { Client, SessionService } from './session';
 import LocalSessionService from './services/session-local';
 import MessageType from '../types/ocpp/type';
 import { InboundMessage, OutboundMessage } from './message';
@@ -46,10 +46,10 @@ type OcppEndpointEvents = {
   server_listening: (config: OcppEndpointConfig) => void;
   server_stopping: () => void;
   server_stopped: () => void;
-  client_connecting: (client: OcppClient) => void;
-  client_connected: (client: OcppClient) => void;
-  client_rejected: (client: OcppClient) => void;
-  client_disconnected: (client: OcppClient) => void;
+  client_connecting: (client: Client) => void;
+  client_connected: (client: Client) => void;
+  client_rejected: (client: Client) => void;
+  client_disconnected: (client: Client) => void;
   message_sent: (message: OutboundMessage) => void;
   message_received: (message: InboundMessage) => void;
 };
@@ -306,7 +306,7 @@ abstract class OcppEndpoint<
     await this.sessionService.remove(clientId);
 
     this.logger.info(`Client with id ${clientId} disconnected`);
-    this.emit('client_disconnected', new OcppClient(clientId));
+    this.emit('client_disconnected', new Client(clientId));
   }
 
   protected async onInboundMessage(message: InboundMessage) {

@@ -1,5 +1,5 @@
 import MessageType from '../types/ocpp/type';
-import { OcppClient } from './session';
+import { Client } from './session';
 import { InboundMessageHandler, ResponseHandler } from './handler';
 
 type MessageValue =
@@ -28,9 +28,9 @@ abstract class OcppMessage {
 }
 
 abstract class InboundMessage extends OcppMessage {
-  readonly sender: OcppClient;
+  readonly sender: Client;
 
-  constructor(sender: OcppClient, id: string) {
+  constructor(sender: Client, id: string) {
     super(id);
     this.sender = sender;
     this._timestamp = new Date();
@@ -38,10 +38,10 @@ abstract class InboundMessage extends OcppMessage {
 }
 
 abstract class OutboundMessage extends OcppMessage {
-  recipient: OcppClient;
+  recipient: Client;
   private _isSent: boolean;
 
-  constructor(recipient: OcppClient, id: string) {
+  constructor(recipient: Client, id: string) {
     super(id);
     this.recipient = recipient;
     this._isSent = false;
@@ -64,7 +64,7 @@ abstract class RespondableMessage<
   private _response?: OutboundMessage;
 
   constructor(
-    sender: OcppClient,
+    sender: Client,
     id: string,
     responseHandler?: ResponseHandler<TResponse>
   ) {
@@ -102,7 +102,7 @@ abstract class ResultingMessage<
   private _response?: TResponse;
 
   constructor(
-    recipient: OcppClient,
+    recipient: Client,
     id: string,
     responseHandler?: InboundMessageHandler<TResponse>
   ) {
