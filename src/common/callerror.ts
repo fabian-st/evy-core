@@ -28,10 +28,7 @@ interface OcppCallErrorMessage extends OcppMessage {
   details: Payload;
 }
 
-class InboundOcppCallError
-  extends InboundMessage
-  implements OcppCallErrorMessage
-{
+class InboundCallError extends InboundMessage implements OcppCallErrorMessage {
   readonly type: OcppMessageType.CALLERROR;
   code: RPCError;
   description: string;
@@ -77,4 +74,4 @@ class OutboundOcppCallError
 }
 
 export default OcppCallErrorMessage;
-export { InboundOcppCallError, OutboundOcppCallError, RPCError };
+export { InboundCallError, OutboundOcppCallError, RPCError };

@@ -17,10 +17,7 @@ import { InboundOcppCall, OutboundOcppCall } from '../common/call';
 
 import { InboundCallResult, OutboundCallResult } from '../common/callresult';
 
-import {
-  InboundOcppCallError,
-  OutboundOcppCallError,
-} from '../common/callerror';
+import { InboundCallError, OutboundOcppCallError } from '../common/callerror';
 
 import OcppProtocolVersion, {
   OcppProtocolVersions,
@@ -400,7 +397,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
           break;
 
         case OcppMessageType.CALLERROR:
-          message = new InboundOcppCallError(
+          message = new InboundCallError(
             client,
             id,
             errorCode,
