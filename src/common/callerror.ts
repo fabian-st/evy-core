@@ -21,14 +21,14 @@ type RPCError =
   | 'SecurityError'
   | 'TypeConstraintViolation';
 
-interface OcppCallErrorMessage extends OcppMessage {
+interface CallError extends OcppMessage {
   readonly type: MessageType.CALLERROR;
   code: RPCError;
   description: string;
   details: Payload;
 }
 
-class InboundCallError extends InboundMessage implements OcppCallErrorMessage {
+class InboundCallError extends InboundMessage implements CallError {
   readonly type: MessageType.CALLERROR;
   code: RPCError;
   description: string;
@@ -49,10 +49,7 @@ class InboundCallError extends InboundMessage implements OcppCallErrorMessage {
   }
 }
 
-class OutboundCallError
-  extends OutboundMessage
-  implements OcppCallErrorMessage
-{
+class OutboundCallError extends OutboundMessage implements CallError {
   readonly type: MessageType.CALLERROR;
   code: RPCError;
   description: string;
@@ -73,5 +70,5 @@ class OutboundCallError
   }
 }
 
-export default OcppCallErrorMessage;
+export default CallError;
 export { InboundCallError, OutboundCallError, RPCError };
