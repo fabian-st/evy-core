@@ -32,7 +32,7 @@ import OcppMessageType from '../types/ocpp/message-type';
 import OcppAction from '../types/ocpp/action';
 
 import {
-  InboundOcppMessage,
+  InboundMessage,
   OcppMessagePayload,
   OutboundMessage,
 } from '../common/message';
@@ -390,7 +390,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
         await this.sendMessage(response);
       };
 
-      let message: InboundOcppMessage;
+      let message: InboundMessage;
       switch (type) {
         case OcppMessageType.CALL:
           message = new InboundOcppCall(

@@ -27,7 +27,7 @@ abstract class OcppMessage {
   }
 }
 
-abstract class InboundOcppMessage extends OcppMessage {
+abstract class InboundMessage extends OcppMessage {
   readonly sender: OcppClient;
 
   constructor(sender: OcppClient, id: string) {
@@ -59,7 +59,7 @@ abstract class OutboundMessage extends OcppMessage {
 
 abstract class RespondableOcppMessage<
   TResponse extends OutboundMessage
-> extends InboundOcppMessage {
+> extends InboundMessage {
   private _responseHandler?: ResponseHandler<TResponse>;
   private _response?: OutboundMessage;
 
@@ -96,7 +96,7 @@ abstract class RespondableOcppMessage<
 }
 
 abstract class ResultingOcppMessage<
-  TResponse extends InboundOcppMessage
+  TResponse extends InboundMessage
 > extends OutboundMessage {
   private _responseHandler?: InboundMessageHandler<TResponse>;
   private _response?: TResponse;
@@ -135,7 +135,7 @@ abstract class ResultingOcppMessage<
 export default OcppMessage;
 export {
   OcppMessagePayload,
-  InboundOcppMessage,
+  InboundMessage,
   OutboundMessage,
   RespondableOcppMessage,
   ResultingOcppMessage,

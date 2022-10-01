@@ -14,7 +14,7 @@ import winstonLogger from './util/logger';
 import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/session-local';
 import OcppMessageType from '../types/ocpp/message-type';
-import { InboundOcppMessage, OutboundMessage } from './message';
+import { InboundMessage, OutboundMessage } from './message';
 import { OutboundOcppCallError } from './callerror';
 import OcppAction, { OcppActions } from '../types/ocpp/action';
 import * as Handlers from './handlers';
@@ -53,7 +53,7 @@ type OcppEndpointEvents = {
   client_rejected: (client: OcppClient) => void;
   client_disconnected: (client: OcppClient) => void;
   message_sent: (message: OutboundMessage) => void;
-  message_received: (message: InboundOcppMessage) => void;
+  message_received: (message: InboundMessage) => void;
 };
 
 abstract class OcppEndpoint<
@@ -311,7 +311,7 @@ abstract class OcppEndpoint<
     this.emit('client_disconnected', new OcppClient(clientId));
   }
 
-  protected async onInboundMessage(message: InboundOcppMessage) {
+  protected async onInboundMessage(message: InboundMessage) {
     this.logger.debug(
       oneLine`Received ${OcppMessageType[message.type]}
       message from client with id ${message.sender.id}`

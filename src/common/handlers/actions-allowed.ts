@@ -3,7 +3,7 @@ import { oneLine } from 'common-tags';
 
 import { OcppEndpointConfig } from '../endpoint';
 import OcppMessageType from '../../types/ocpp/message-type';
-import { InboundOcppMessage, OutboundMessage } from '../message';
+import { InboundMessage, OutboundMessage } from '../message';
 import { InboundOcppCall, OutboundOcppCall } from '../call';
 import { OutboundOcppCallError } from '../callerror';
 import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
@@ -18,7 +18,7 @@ class InboundActionsAllowedHandler extends InboundMessageHandler {
     this.logger = logger;
   }
 
-  async handle(message: InboundOcppMessage) {
+  async handle(message: InboundMessage) {
     if (
       message instanceof InboundOcppCall &&
       !this.config.actionsAllowed.includes(message.action)

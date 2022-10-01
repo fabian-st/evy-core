@@ -3,7 +3,7 @@ import OcppMessageType from '../types/ocpp/message-type';
 import OcppAction from '../types/ocpp/action';
 import OcppMessage, {
   OcppMessagePayload,
-  InboundOcppMessage,
+  InboundMessage,
   OutboundMessage,
 } from './message';
 
@@ -29,7 +29,7 @@ interface OcppCallErrorMessage extends OcppMessage {
 }
 
 class InboundOcppCallError
-  extends InboundOcppMessage
+  extends InboundMessage
   implements OcppCallErrorMessage
 {
   readonly type: OcppMessageType.CALLERROR;
