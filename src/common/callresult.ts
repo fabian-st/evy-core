@@ -7,15 +7,14 @@ import OcppMessage, {
   OutboundMessage,
 } from './message';
 
-interface CallResultMessage<TPayload extends Payload = Payload>
-  extends OcppMessage {
+interface CallResult<TPayload extends Payload = Payload> extends OcppMessage {
   readonly type: MessageType.CALLRESULT;
   data: TPayload;
 }
 
 class InboundCallResult<TPayload extends Payload = Payload>
   extends InboundMessage
-  implements CallResultMessage<TPayload>
+  implements CallResult<TPayload>
 {
   readonly type: MessageType.CALLRESULT;
   action: OcppAction;
@@ -30,7 +29,7 @@ class InboundCallResult<TPayload extends Payload = Payload>
 
 class OutboundCallResult<TPayload extends Payload = Payload>
   extends OutboundMessage
-  implements CallResultMessage<TPayload>
+  implements CallResult<TPayload>
 {
   readonly type: MessageType.CALLRESULT;
   action: OcppAction;
@@ -43,5 +42,5 @@ class OutboundCallResult<TPayload extends Payload = Payload>
   }
 }
 
-export default CallResultMessage;
+export default CallResult;
 export { InboundCallResult, OutboundCallResult };
