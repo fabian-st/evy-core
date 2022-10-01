@@ -32,7 +32,7 @@ import {
   OutboundMessageHandler,
 } from '../common/handler';
 
-type WebSocketConfig = EndpointOptions & {
+type WsOptions = EndpointOptions & {
   wsOptions?: WSOptions;
   route?: string;
   protocols?: Readonly<ProtocolVersion[]>;
@@ -42,13 +42,13 @@ type WebSocketConfig = EndpointOptions & {
   schemaDir?: Map<ProtocolVersion[], string>;
 };
 
-class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
+class WebSocketEndpoint extends OcppEndpoint<WsOptions> {
   protected wsServer: WSServer;
   protected requestSchemas: Map<OcppAction, Record<string, any>>;
   protected responseSchemas: Map<OcppAction, Record<string, any>>;
 
   constructor(
-    config: WebSocketConfig,
+    config: WsOptions,
     authenticationHandlers: AuthenticationHandler[],
     inboundMessageHandlers: InboundMessageHandler[],
     outboundMessageHandlers?: OutboundMessageHandler[],
@@ -74,7 +74,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
   protected get defaultConfig() {
     const schemaBase = path.join(__dirname, '../../../var/jsonschema');
 
-    const config: WebSocketConfig = {
+    const config: WsOptions = {
       wsOptions: { noServer: true },
       route: 'ocpp',
       protocols: ProtocolVersions,
@@ -555,4 +555,4 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
 }
 
 export default WebSocketEndpoint;
-export { WebSocketConfig };
+export { WsOptions };
