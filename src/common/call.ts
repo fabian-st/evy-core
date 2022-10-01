@@ -5,7 +5,7 @@ import { InboundCallResult, OutboundCallResult } from './callresult';
 import OcppMessage, {
   Payload,
   RespondableMessage,
-  ResultingOcppMessage,
+  ResultingMessage,
 } from './message';
 import { InboundMessageHandler, ResponseHandler } from './handler';
 
@@ -51,7 +51,7 @@ class OutboundCall<
     TResponsePayload extends Payload = Payload,
     TResponse extends InboundCallResult<TResponsePayload> = InboundCallResult<TResponsePayload>
   >
-  extends ResultingOcppMessage<TResponse>
+  extends ResultingMessage<TResponse>
   implements OcppCallMessage<TAction, TPayload>
 {
   type: MessageType.CALL;

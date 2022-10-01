@@ -95,7 +95,7 @@ abstract class RespondableMessage<
   }
 }
 
-abstract class ResultingOcppMessage<
+abstract class ResultingMessage<
   TResponse extends InboundMessage
 > extends OutboundMessage {
   private _responseHandler?: InboundMessageHandler<TResponse>;
@@ -138,5 +138,5 @@ export {
   InboundMessage,
   OutboundMessage,
   RespondableMessage,
-  ResultingOcppMessage,
+  ResultingMessage,
 };
