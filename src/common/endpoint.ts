@@ -23,7 +23,7 @@ import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
 
 import {
   AsyncHandler,
-  OcppAuthenticationHandler,
+  AuthenticationHandler,
   OcppAuthenticationRequest,
   InboundMessageHandler,
   OutboundMessageHandler,
@@ -62,7 +62,7 @@ abstract class OcppEndpoint<
   protected httpServer: HTTPServer | HTTPSServer;
   protected sessionService: SessionService;
   protected logger: Logger;
-  protected authenticationHandlers: OcppAuthenticationHandler[];
+  protected authenticationHandlers: AuthenticationHandler[];
   protected inboundMessageHandlers: InboundMessageHandler[];
   protected outboundMessageHandlers: OutboundMessageHandler[];
 
@@ -72,7 +72,7 @@ abstract class OcppEndpoint<
 
   constructor(
     config: TConfig,
-    authenticationHandlers: OcppAuthenticationHandler[],
+    authenticationHandlers: AuthenticationHandler[],
     inboundMessageHandlers: InboundMessageHandler[],
     outboundMessageHandlers: OutboundMessageHandler[] = [],
     sessionService: SessionService = new LocalSessionService(),
@@ -130,10 +130,10 @@ abstract class OcppEndpoint<
   protected get defaultHandlers() {
     return {
       authentication: {
-        prefix: <OcppAuthenticationHandler[]>[
+        prefix: <AuthenticationHandler[]>[
           new Handlers.SessionExistsHandler(this.sessionService, this.logger),
         ],
-        suffix: <OcppAuthenticationHandler[]>[],
+        suffix: <AuthenticationHandler[]>[],
       },
       inboundMessage: {
         prefix: [

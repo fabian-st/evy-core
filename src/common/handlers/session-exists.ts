@@ -1,12 +1,9 @@
 import { Logger } from 'ts-log';
 
-import {
-  OcppAuthenticationHandler,
-  OcppAuthenticationRequest,
-} from '../handler';
+import { AuthenticationHandler, OcppAuthenticationRequest } from '../handler';
 import { SessionService } from '../session';
 
-class SessionExistsHandler extends OcppAuthenticationHandler {
+class SessionExistsHandler extends AuthenticationHandler {
   private sessionService: SessionService;
   private logger: Logger;
 

@@ -3,7 +3,7 @@ import { OcppClient } from './session';
 import OcppMessage, { InboundMessage, OutboundMessage } from './message';
 import ProtocolVersion from '../types/ocpp/version';
 
-abstract class OcppAuthenticationHandler<
+abstract class AuthenticationHandler<
   TRequest extends OcppAuthenticationRequest = OcppAuthenticationRequest
 > extends AsyncHandler<TRequest> {}
 
@@ -77,7 +77,7 @@ type ResponseHandler<TResponse extends OutboundMessage> = (
 
 export {
   AsyncHandler,
-  OcppAuthenticationHandler,
+  AuthenticationHandler,
   OcppAuthenticationRequest,
   InboundMessageHandler,
   OutboundMessageHandler,
