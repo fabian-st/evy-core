@@ -19,9 +19,7 @@ import { OutboundCallError } from './callerror';
 import OcppAction, { OcppActions } from '../types/ocpp/action';
 import * as Handlers from './handlers';
 
-import OcppProtocolVersion, {
-  OcppProtocolVersions,
-} from '../types/ocpp/protocol-version';
+import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
 
 import {
   AsyncHandler,
@@ -36,7 +34,7 @@ type OcppEndpointConfig = {
   hostname?: string;
   https?: boolean;
   httpOptions?: HTTPOptions | HTTPSOptions;
-  protocols?: Readonly<OcppProtocolVersion[]>;
+  protocols?: Readonly<ProtocolVersion[]>;
   actionsAllowed?: Readonly<OcppAction[]>;
   maxConnections?: number;
   messageTimeout?: number;
@@ -121,7 +119,7 @@ abstract class OcppEndpoint<
       port: process.env.NODE_ENV === 'development' ? 8080 : 80,
       hostname: 'localhost',
       httpOptions: this.defaultHttpOptions,
-      protocols: OcppProtocolVersions,
+      protocols: ProtocolVersions,
       actionsAllowed: OcppActions,
       maxConnections: 511,
       messageTimeout: 30000,

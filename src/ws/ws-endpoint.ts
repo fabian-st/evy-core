@@ -19,9 +19,7 @@ import { InboundCallResult, OutboundCallResult } from '../common/callresult';
 
 import { InboundCallError, OutboundCallError } from '../common/callerror';
 
-import OcppProtocolVersion, {
-  OcppProtocolVersions,
-} from '../types/ocpp/protocol-version';
+import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
 import OcppMessageType from '../types/ocpp/message-type';
 import OcppAction from '../types/ocpp/action';
 
@@ -37,11 +35,11 @@ import {
 type WebSocketConfig = OcppEndpointConfig & {
   wsOptions?: WSOptions;
   route?: string;
-  protocols?: Readonly<OcppProtocolVersion[]>;
+  protocols?: Readonly<ProtocolVersion[]>;
   basicAuth?: boolean;
   certificateAuth?: boolean;
   schemaValidation?: boolean;
-  schemaDir?: Map<OcppProtocolVersion[], string>;
+  schemaDir?: Map<ProtocolVersion[], string>;
 };
 
 class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
@@ -79,7 +77,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
     const config: WebSocketConfig = {
       wsOptions: { noServer: true },
       route: 'ocpp',
-      protocols: OcppProtocolVersions,
+      protocols: ProtocolVersions,
       basicAuth: true,
       certificateAuth: true,
       schemaValidation: true,
@@ -120,7 +118,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
           message.type,
           message.action || session.pendingInboundMessage.action,
           rawData,
-          ws.protocol as OcppProtocolVersion
+          ws.protocol as ProtocolVersion
         );
 
         if (!messageValidation?.valid) {
@@ -212,7 +210,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
       }
     })();
 
-    const onAccept = async (protocol: OcppProtocolVersion) => {
+    const onAccept = async (protocol: ProtocolVersion) => {
       this.logger.debug(
         `Upgrading WebSocket connection with subprotocol: ${protocol}`
       );
@@ -264,7 +262,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
 
     const supportedProtocols = this.config.protocols.filter(protocol =>
       clientProtocols?.includes(protocol)
-    ) as OcppProtocolVersion[];
+    ) as ProtocolVersion[];
 
     const trimSlashesRegex = /^\/+|\/+$/g;
     if (
@@ -360,7 +358,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
           type,
           action,
           payload,
-          ws.protocol as OcppProtocolVersion
+          ws.protocol as ProtocolVersion
         );
 
         if (!messageValidation?.valid) {
@@ -484,7 +482,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
     type: OcppMessageType.CALL | OcppMessageType.CALLRESULT,
     action: OcppAction,
     payload: Payload,
-    protocol: OcppProtocolVersion
+    protocol: ProtocolVersion
   ) {
     let schema: Record<string, any>;
     let schemaType: 'request' | 'response';
@@ -515,7 +513,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
   protected async loadSchema(
     type: 'request' | 'response',
     action: OcppAction,
-    protocol: OcppProtocolVersion
+    protocol: ProtocolVersion
   ) {
     let schemaDir: string;
     this.config.schemaDir.forEach((dir, protocols) => {

@@ -1,18 +1,18 @@
 import { InboundCall, OutboundCall } from './call';
-import OcppProtocolVersion from '../types/ocpp/protocol-version';
+import ProtocolVersion from '../types/ocpp/version';
 
 class OcppSession {
   private _isActiveHandler: () => boolean;
   private _dropHandler: () => void;
 
   readonly client: OcppClient;
-  readonly protocol: OcppProtocolVersion;
+  readonly protocol: ProtocolVersion;
   pendingInboundMessage?: InboundCall;
   pendingOutboundMessage?: OutboundCall;
 
   constructor(
     client: OcppClient,
-    protocol: OcppProtocolVersion,
+    protocol: ProtocolVersion,
     isActiveHandler?: () => boolean,
     dropHandler?: () => void
   ) {

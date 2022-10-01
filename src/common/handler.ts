@@ -1,7 +1,7 @@
 import { AsyncHandler } from './util/handler';
 import { OcppClient } from './session';
 import OcppMessage, { InboundMessage, OutboundMessage } from './message';
-import OcppProtocolVersion from '../types/ocpp/protocol-version';
+import ProtocolVersion from '../types/ocpp/version';
 
 abstract class OcppAuthenticationHandler<
   TRequest extends OcppAuthenticationRequest = OcppAuthenticationRequest
@@ -10,10 +10,10 @@ abstract class OcppAuthenticationHandler<
 abstract class OcppAuthenticationRequest {
   private _accepted: boolean;
   private _rejected: boolean;
-  private _protocol: OcppProtocolVersion;
+  private _protocol: ProtocolVersion;
 
   readonly client: OcppClient;
-  readonly protocols: OcppProtocolVersion[];
+  readonly protocols: ProtocolVersion[];
   readonly password?: string;
   readonly certificate?: unknown;
 
@@ -21,7 +21,7 @@ abstract class OcppAuthenticationRequest {
     this._accepted = this._rejected = false;
   }
 
-  accept(protocol: OcppProtocolVersion = this.protocols[0]) {
+  accept(protocol: ProtocolVersion = this.protocols[0]) {
     if (this.isAccepted || this.isRejected) {
       throw new Error(
         `accept() was called but authentication attempt from
