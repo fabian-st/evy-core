@@ -1,6 +1,5 @@
 import { Client } from './session';
 import MessageType from '../types/ocpp/type';
-import OcppAction from '../types/ocpp/action';
 import OcppMessage, {
   Payload,
   InboundMessage,
