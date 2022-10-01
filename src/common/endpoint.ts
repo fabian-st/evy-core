@@ -11,7 +11,7 @@ import { oneLine } from 'common-tags';
 import merge from 'lodash.merge';
 
 import winstonLogger from './util/Logger';
-import OcppSession, { OcppClient, OcppSessionService } from './OcppSession';
+import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/LocalSessionService';
 import OcppMessageType from '../types/ocpp/OcppMessageType';
 import { InboundOcppMessage, OutboundOcppMessage } from './OcppMessage';

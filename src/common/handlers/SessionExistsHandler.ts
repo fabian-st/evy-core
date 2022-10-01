@@ -4,7 +4,7 @@ import {
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
 } from '../OcppHandlers';
-import { OcppSessionService } from '../OcppSession';
+import { OcppSessionService } from '../session';
 
 class SessionExistsHandler extends OcppAuthenticationHandler {
   private sessionService: OcppSessionService;

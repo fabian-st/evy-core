@@ -1,5 +1,5 @@
 import { AsyncHandler } from './util/Handler';
-import { OcppClient } from './OcppSession';
+import { OcppClient } from './session';
 import OcppMessage, {
   InboundOcppMessage,
   OutboundOcppMessage,
