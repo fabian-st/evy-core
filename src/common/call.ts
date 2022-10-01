@@ -18,7 +18,7 @@ interface OcppCallMessage<
   data: TPayload;
 }
 
-class InboundOcppCall<
+class InboundCall<
     TAction extends OcppAction = OcppAction,
     TPayload extends Payload = Payload,
     TResponsePayload extends Payload = Payload,
@@ -73,4 +73,4 @@ class OutboundOcppCall<
 }
 
 export default OcppCallMessage;
-export { InboundOcppCall, OutboundOcppCall };
+export { InboundCall, OutboundOcppCall };

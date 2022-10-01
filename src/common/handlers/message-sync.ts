@@ -4,7 +4,7 @@ import { oneLine } from 'common-tags';
 import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { OcppSessionService } from '../session';
 import { InboundMessage, OutboundMessage } from '../message';
-import { InboundOcppCall } from '../call';
+import { InboundCall } from '../call';
 import { OutboundCallError } from '../callerror';
 import OcppMessageType from '../../types/ocpp/message-type';
 
@@ -30,7 +30,7 @@ class InboundMessageSynchronicityHandler extends InboundMessageHandler {
     */
     if (
       session.pendingOutboundMessage &&
-      !(message instanceof InboundOcppCall) &&
+      !(message instanceof InboundCall) &&
       message.id !== session.pendingOutboundMessage.id
     ) {
       error = true;
@@ -44,10 +44,7 @@ class InboundMessageSynchronicityHandler extends InboundMessageHandler {
     Inbound CALLRESULT & CALLERROR messages from the client are only allowed
     if the server has sent an outbound CALL message before.
     */
-    if (
-      !session.pendingOutboundMessage &&
-      !(message instanceof InboundOcppCall)
-    ) {
+    if (!session.pendingOutboundMessage && !(message instanceof InboundCall)) {
       error = true;
       this.logger.warn(
         oneLine`Received ${OcppMessageType[message.type]} message
@@ -59,7 +56,7 @@ class InboundMessageSynchronicityHandler extends InboundMessageHandler {
     The client must not send further CALL messages until the previous one
     has been responded to by the server.
     */
-    if (session.pendingInboundMessage && message instanceof InboundOcppCall) {
+    if (session.pendingInboundMessage && message instanceof InboundCall) {
       error = true;
       this.logger.warn(
         oneLine`Received CALL message while there

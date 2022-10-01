@@ -1,10 +1,10 @@
-import { InboundOcppCall } from '../../../../common/call';
+import { InboundCall } from '../../../../common/call';
 import { OutboundCallResult } from '../../../../common/callresult';
 import IdToken from '../structs/IdToken';
 import MeterValue from '../structs/MeterValue';
 import IdTagInfo from '../structs/IdTagInfo';
 
-declare type StopTransactionRequest = InboundOcppCall<
+declare type StopTransactionRequest = InboundCall<
   'StopTransaction',
   StopTransactionRequestPayload,
   StopTransactionResponsePayload,

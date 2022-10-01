@@ -1,7 +1,7 @@
 import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { OcppSessionService } from '../session';
 import { InboundMessage, OutboundMessage } from '../message';
-import { InboundOcppCall, OutboundOcppCall } from '../call';
+import { InboundCall, OutboundOcppCall } from '../call';
 
 class InboundPendingMessageHandler extends InboundMessageHandler {
   private sessionService;
@@ -16,7 +16,7 @@ class InboundPendingMessageHandler extends InboundMessageHandler {
     const session = await this.sessionService.get(message.sender.id);
 
     if (
-      !(message instanceof InboundOcppCall) &&
+      !(message instanceof InboundCall) &&
       session.pendingOutboundMessage &&
       message.id === session.pendingOutboundMessage.id
     ) {
@@ -24,7 +24,7 @@ class InboundPendingMessageHandler extends InboundMessageHandler {
       await this.sessionService.update(session.client.id, session);
     }
 
-    if (message instanceof InboundOcppCall && !session.pendingInboundMessage) {
+    if (message instanceof InboundCall && !session.pendingInboundMessage) {
       session.pendingInboundMessage = message;
       await this.sessionService.update(session.client.id, session);
     }

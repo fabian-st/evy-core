@@ -13,7 +13,7 @@ import merge from 'lodash.merge';
 
 import OcppEndpoint, { OcppEndpointConfig } from '../common/endpoint';
 import { OcppClient, OcppSessionService } from '../common/session';
-import { InboundOcppCall, OutboundOcppCall } from '../common/call';
+import { InboundCall, OutboundOcppCall } from '../common/call';
 
 import { InboundCallResult, OutboundCallResult } from '../common/callresult';
 
@@ -383,7 +383,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
       let message: InboundMessage;
       switch (type) {
         case OcppMessageType.CALL:
-          message = new InboundOcppCall(
+          message = new InboundCall(
             client,
             id,
             action,
