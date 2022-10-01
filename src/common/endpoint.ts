@@ -21,7 +21,7 @@ import * as Handlers from './handlers';
 
 import OcppProtocolVersion, {
   OcppProtocolVersions,
-} from '../types/ocpp/OcppProtocolVersion';
+} from '../types/ocpp/protocol-version';
 
 import {
   AsyncHandler,

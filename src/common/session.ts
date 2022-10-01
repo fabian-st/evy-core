@@ -1,5 +1,5 @@
 import { InboundOcppCall, OutboundOcppCall } from './call';
-import OcppProtocolVersion from '../types/ocpp/OcppProtocolVersion';
+import OcppProtocolVersion from '../types/ocpp/protocol-version';
 
 class OcppSession {
   private _isActiveHandler: () => boolean;

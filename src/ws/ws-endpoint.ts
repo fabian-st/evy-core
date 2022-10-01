@@ -27,7 +27,7 @@ import {
 
 import OcppProtocolVersion, {
   OcppProtocolVersions,
-} from '../types/ocpp/OcppProtocolVersion';
+} from '../types/ocpp/protocol-version';
 import OcppMessageType from '../types/ocpp/message-type';
 import OcppAction from '../types/ocpp/action';
 
