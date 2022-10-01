@@ -5,7 +5,7 @@ import * as Handlers from './handlers';
 
 const wsEndpoint = new WebSocketEndpoint(
   { basicAuth: false },
-  [new Handlers.AuthenticationHandler()],
+  [new Handlers.BasicAuthHandler()],
   [
     new Handlers.BootNotificationHandler(),
     new Handlers.StatusNotificationHandler(),
