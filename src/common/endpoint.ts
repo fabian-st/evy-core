@@ -10,7 +10,7 @@ import { Logger } from 'ts-log';
 import { oneLine } from 'common-tags';
 import merge from 'lodash.merge';
 
-import winstonLogger from './util/Logger';
+import winstonLogger from './util/logger';
 import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/session-local';
 import OcppMessageType from '../types/ocpp/OcppMessageType';

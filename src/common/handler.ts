@@ -1,4 +1,4 @@
-import { AsyncHandler } from './util/Handler';
+import { AsyncHandler } from './util/handler';
 import { OcppClient } from './session';
 import OcppMessage, {
   InboundOcppMessage,
