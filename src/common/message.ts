@@ -2,15 +2,15 @@ import MessageType from '../types/ocpp/type';
 import { OcppClient } from './session';
 import { InboundMessageHandler, ResponseHandler } from './handler';
 
-type OcppMessageValue =
+type MessageValue =
   | string
   | number
   | boolean
   | Date
-  | { [x: string]: OcppMessageValue }
-  | Array<OcppMessageValue>;
+  | { [x: string]: MessageValue }
+  | Array<MessageValue>;
 
-type Payload = OcppMessageValue | null | {};
+type Payload = MessageValue | null | {};
 
 abstract class OcppMessage {
   readonly type!: MessageType;
