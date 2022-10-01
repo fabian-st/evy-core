@@ -9,7 +9,7 @@ import { OcppSessionService } from '../session';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
 import { InboundOcppCall } from '../call';
 import { OutboundOcppCallError } from '../callerror';
-import OcppMessageType from '../../types/ocpp/OcppMessageType';
+import OcppMessageType from '../../types/ocpp/message-type';
 
 class InboundMessageSynchronicityHandler extends InboundOcppMessageHandler {
   private sessionService;

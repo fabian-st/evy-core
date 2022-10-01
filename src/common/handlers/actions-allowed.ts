@@ -2,7 +2,7 @@ import { Logger } from 'ts-log';
 import { oneLine } from 'common-tags';
 
 import { OcppEndpointConfig } from '../endpoint';
-import OcppMessageType from '../../types/ocpp/OcppMessageType';
+import OcppMessageType from '../../types/ocpp/message-type';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
 import { InboundOcppCall, OutboundOcppCall } from '../call';
 import { OutboundOcppCallError } from '../callerror';

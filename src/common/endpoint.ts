@@ -13,7 +13,7 @@ import merge from 'lodash.merge';
 import winstonLogger from './util/logger';
 import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/session-local';
-import OcppMessageType from '../types/ocpp/OcppMessageType';
+import OcppMessageType from '../types/ocpp/message-type';
 import { InboundOcppMessage, OutboundOcppMessage } from './message';
 import { OutboundOcppCallError } from './callerror';
 import OcppAction, { OcppActions } from '../types/ocpp/action';

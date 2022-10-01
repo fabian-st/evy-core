@@ -1,4 +1,4 @@
-import OcppMessageType from '../types/ocpp/OcppMessageType';
+import OcppMessageType from '../types/ocpp/message-type';
 import { OcppClient } from './session';
 import { InboundOcppMessageHandler, ResponseHandler } from './handler';
 
