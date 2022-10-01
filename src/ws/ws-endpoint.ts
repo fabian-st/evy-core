@@ -11,7 +11,7 @@ import { randomBytes } from 'crypto';
 import basicAuth from 'basic-auth';
 import merge from 'lodash.merge';
 
-import OcppEndpoint, { OcppEndpointConfig } from '../common/endpoint';
+import OcppEndpoint, { EndpointOptions } from '../common/endpoint';
 import { Client, SessionService } from '../common/session';
 import { InboundCall, OutboundCall } from '../common/call';
 
@@ -32,7 +32,7 @@ import {
   OutboundMessageHandler,
 } from '../common/handler';
 
-type WebSocketConfig = OcppEndpointConfig & {
+type WebSocketConfig = EndpointOptions & {
   wsOptions?: WSOptions;
   route?: string;
   protocols?: Readonly<ProtocolVersion[]>;

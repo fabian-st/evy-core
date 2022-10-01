@@ -1,7 +1,7 @@
 import { Logger } from 'ts-log';
 import { oneLine } from 'common-tags';
 
-import { OcppEndpointConfig } from '../endpoint';
+import { EndpointOptions } from '../endpoint';
 import MessageType from '../../types/ocpp/type';
 import { InboundMessage, OutboundMessage } from '../message';
 import { InboundCall, OutboundCall } from '../call';
@@ -9,10 +9,10 @@ import { OutboundCallError } from '../callerror';
 import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 
 class InboundActionsAllowedHandler extends InboundMessageHandler {
-  private config: OcppEndpointConfig;
+  private config: EndpointOptions;
   private logger: Logger;
 
-  constructor(config: OcppEndpointConfig, logger: Logger) {
+  constructor(config: EndpointOptions, logger: Logger) {
     super();
     this.config = config;
     this.logger = logger;
@@ -41,10 +41,10 @@ class InboundActionsAllowedHandler extends InboundMessageHandler {
 }
 
 class OutboundActionsAllowedHandler extends OutboundMessageHandler {
-  private config: OcppEndpointConfig;
+  private config: EndpointOptions;
   private logger: Logger;
 
-  constructor(config: OcppEndpointConfig, logger: Logger) {
+  constructor(config: EndpointOptions, logger: Logger) {
     super();
     this.config = config;
     this.logger = logger;

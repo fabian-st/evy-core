@@ -29,7 +29,7 @@ import {
   OutboundMessageHandler,
 } from './handler';
 
-type OcppEndpointConfig = {
+type EndpointOptions = {
   port?: number;
   hostname?: string;
   https?: boolean;
@@ -42,8 +42,8 @@ type OcppEndpointConfig = {
 };
 
 type OcppEndpointEvents = {
-  server_starting: (config: OcppEndpointConfig) => void;
-  server_listening: (config: OcppEndpointConfig) => void;
+  server_starting: (config: EndpointOptions) => void;
+  server_listening: (config: EndpointOptions) => void;
   server_stopping: () => void;
   server_stopped: () => void;
   client_connecting: (client: Client) => void;
@@ -55,7 +55,7 @@ type OcppEndpointEvents = {
 };
 
 abstract class OcppEndpoint<
-  TConfig extends OcppEndpointConfig
+  TConfig extends EndpointOptions
 > extends (EventEmitter as new () => TypedEmitter<OcppEndpointEvents>) {
   protected _config: TConfig;
 
@@ -124,7 +124,7 @@ abstract class OcppEndpoint<
       maxConnections: 511,
       messageTimeout: 30000,
       sessionTimeout: 60000,
-    } as OcppEndpointConfig;
+    } as EndpointOptions;
   }
 
   protected get defaultHandlers() {
@@ -334,4 +334,4 @@ abstract class OcppEndpoint<
 }
 
 export default OcppEndpoint;
-export { OcppEndpointEvents, OcppEndpointConfig };
+export { OcppEndpointEvents, EndpointOptions };
