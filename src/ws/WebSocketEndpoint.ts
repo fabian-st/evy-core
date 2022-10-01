@@ -11,7 +11,7 @@ import { randomBytes } from 'crypto';
 import basicAuth from 'basic-auth';
 import merge from 'lodash.merge';
 
-import OcppEndpoint, { OcppEndpointConfig } from '../common/OcppEndpoint';
+import OcppEndpoint, { OcppEndpointConfig } from '../common/endpoint';
 import { OcppClient, OcppSessionService } from '../common/OcppSession';
 import { InboundOcppCall, OutboundOcppCall } from '../common/OcppCallMessage';
 
