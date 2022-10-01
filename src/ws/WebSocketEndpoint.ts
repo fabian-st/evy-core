@@ -35,7 +35,7 @@ import {
   InboundOcppMessage,
   OcppMessagePayload,
   OutboundOcppMessage,
-} from '../common/OcppMessage';
+} from '../common/message';
 
 import {
   InboundOcppMessageHandler,

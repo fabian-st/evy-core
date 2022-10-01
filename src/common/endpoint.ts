@@ -14,7 +14,7 @@ import winstonLogger from './util/Logger';
 import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/LocalSessionService';
 import OcppMessageType from '../types/ocpp/OcppMessageType';
-import { InboundOcppMessage, OutboundOcppMessage } from './OcppMessage';
+import { InboundOcppMessage, OutboundOcppMessage } from './message';
 import { OutboundOcppCallError } from './OcppCallErrorMessage';
 import OcppAction, { OcppActions } from '../types/ocpp/OcppAction';
 import * as Handlers from './handlers';

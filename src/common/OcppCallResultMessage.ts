@@ -5,7 +5,7 @@ import OcppMessage, {
   OcppMessagePayload,
   InboundOcppMessage,
   OutboundOcppMessage,
-} from './OcppMessage';
+} from './message';
 
 interface OcppCallResultMessage<
   TPayload extends OcppMessagePayload = OcppMessagePayload

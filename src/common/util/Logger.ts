@@ -2,7 +2,7 @@ import winston, { format, transports } from 'winston';
 import { Logger } from 'ts-log';
 import pick from 'lodash.pick';
 
-import OcppMessage from '../OcppMessage';
+import OcppMessage from '../message';
 
 const config = {
   transports: [new transports.Console({})],

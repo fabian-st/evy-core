@@ -9,7 +9,7 @@ import OcppMessage, {
   OcppMessagePayload,
   RespondableOcppMessage,
   ResultingOcppMessage,
-} from './OcppMessage';
+} from './message';
 import { InboundOcppMessageHandler, ResponseHandler } from './OcppHandlers';
 
 interface OcppCallMessage<

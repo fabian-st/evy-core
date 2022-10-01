@@ -3,7 +3,7 @@ import { OcppClient } from './session';
 import OcppMessage, {
   InboundOcppMessage,
   OutboundOcppMessage,
-} from './OcppMessage';
+} from './message';
 import OcppProtocolVersion from '../types/ocpp/OcppProtocolVersion';
 
 abstract class OcppAuthenticationHandler<
