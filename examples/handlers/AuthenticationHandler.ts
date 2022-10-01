@@ -1,7 +1,7 @@
 import {
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
-} from '../../src/common/OcppHandlers';
+} from '../../src/common/handler';
 
 class AuthenticationHandler extends OcppAuthenticationHandler {
   async handle(request: OcppAuthenticationRequest) {

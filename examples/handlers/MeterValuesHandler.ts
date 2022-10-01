@@ -1,5 +1,5 @@
 import { OutboundOcppCallResult } from '../../src/common/callresult';
-import { InboundOcppMessageHandler } from '../../src/common/OcppHandlers';
+import { InboundOcppMessageHandler } from '../../src/common/handler';
 import { MeterValuesRequest } from '../../src/types/ocpp/1.6/messages/MeterValues';
 
 class MeterValuesHandler extends InboundOcppMessageHandler {

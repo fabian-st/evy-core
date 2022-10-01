@@ -4,7 +4,7 @@ import { oneLine } from 'common-tags';
 import {
   InboundOcppMessageHandler,
   OutboundOcppMessageHandler,
-} from '../OcppHandlers';
+} from '../handler';
 import { OcppSessionService } from '../session';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
 import { InboundOcppCall } from '../call';

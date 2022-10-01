@@ -42,7 +42,7 @@ import {
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
   OutboundOcppMessageHandler,
-} from '../common/OcppHandlers';
+} from '../common/handler';
 
 type WebSocketConfig = OcppEndpointConfig & {
   wsOptions?: WSOptions;

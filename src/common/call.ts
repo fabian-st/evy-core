@@ -7,7 +7,7 @@ import OcppMessage, {
   RespondableOcppMessage,
   ResultingOcppMessage,
 } from './message';
-import { InboundOcppMessageHandler, ResponseHandler } from './OcppHandlers';
+import { InboundOcppMessageHandler, ResponseHandler } from './handler';
 
 interface OcppCallMessage<
   TAction extends OcppAction = OcppAction,

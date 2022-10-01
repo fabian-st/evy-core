@@ -3,7 +3,7 @@ import { Logger } from 'ts-log';
 import {
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
-} from '../OcppHandlers';
+} from '../handler';
 import { OcppSessionService } from '../session';
 
 class SessionExistsHandler extends OcppAuthenticationHandler {

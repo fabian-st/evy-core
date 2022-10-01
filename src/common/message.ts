@@ -1,6 +1,6 @@
 import OcppMessageType from '../types/ocpp/OcppMessageType';
 import { OcppClient } from './session';
-import { InboundOcppMessageHandler, ResponseHandler } from './OcppHandlers';
+import { InboundOcppMessageHandler, ResponseHandler } from './handler';
 
 type OcppMessageValue =
   | string

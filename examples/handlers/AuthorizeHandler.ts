@@ -1,5 +1,5 @@
 import { OutboundOcppCallResult } from '../../src/common/callresult';
-import { InboundOcppMessageHandler } from '../../src/common/OcppHandlers';
+import { InboundOcppMessageHandler } from '../../src/common/handler';
 import { AuthorizeRequest } from '../../src/types/ocpp/1.6/messages/Authorize';
 
 class HeartbeatHandler extends InboundOcppMessageHandler {

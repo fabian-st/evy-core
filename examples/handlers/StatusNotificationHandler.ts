@@ -1,5 +1,5 @@
 import { OutboundOcppCallResult } from '../../src/common/callresult';
-import { InboundOcppMessageHandler } from '../../src/common/OcppHandlers';
+import { InboundOcppMessageHandler } from '../../src/common/handler';
 import { StatusNotificationRequest } from '../../src/types/ocpp/1.6/messages/StatusNotification';
 
 class StatusNotificationHandler extends InboundOcppMessageHandler {

@@ -29,7 +29,7 @@ import {
   OcppAuthenticationRequest,
   InboundOcppMessageHandler,
   OutboundOcppMessageHandler,
-} from './OcppHandlers';
+} from './handler';
 
 type OcppEndpointConfig = {
   port?: number;

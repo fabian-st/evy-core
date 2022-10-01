@@ -9,7 +9,7 @@ import { OutboundOcppCallError } from '../callerror';
 import {
   InboundOcppMessageHandler,
   OutboundOcppMessageHandler,
-} from '../OcppHandlers';
+} from '../handler';
 
 class InboundActionsAllowedHandler extends InboundOcppMessageHandler {
   private config: OcppEndpointConfig;

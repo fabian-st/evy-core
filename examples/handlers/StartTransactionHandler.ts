@@ -1,5 +1,5 @@
 import { OutboundOcppCallResult } from '../../src/common/callresult';
-import { InboundOcppMessageHandler } from '../../src/common/OcppHandlers';
+import { InboundOcppMessageHandler } from '../../src/common/handler';
 import { StartTransactionRequest } from '../../src/types/ocpp/1.6/messages/StartTransaction';
 
 class StartTransactionHandler extends InboundOcppMessageHandler {
