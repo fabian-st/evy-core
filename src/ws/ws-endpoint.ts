@@ -29,7 +29,7 @@ import OcppProtocolVersion, {
   OcppProtocolVersions,
 } from '../types/ocpp/OcppProtocolVersion';
 import OcppMessageType from '../types/ocpp/OcppMessageType';
-import OcppAction from '../types/ocpp/OcppAction';
+import OcppAction from '../types/ocpp/action';
 
 import {
   InboundOcppMessage,
