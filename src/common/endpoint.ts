@@ -41,7 +41,7 @@ type EndpointOptions = {
   sessionTimeout?: number;
 };
 
-type OcppEndpointEvents = {
+type EndpointEvents = {
   server_starting: (config: EndpointOptions) => void;
   server_listening: (config: EndpointOptions) => void;
   server_stopping: () => void;
@@ -56,7 +56,7 @@ type OcppEndpointEvents = {
 
 abstract class OcppEndpoint<
   TConfig extends EndpointOptions
-> extends (EventEmitter as new () => TypedEmitter<OcppEndpointEvents>) {
+> extends (EventEmitter as new () => TypedEmitter<EndpointEvents>) {
   protected _config: TConfig;
 
   protected httpServer: HTTPServer | HTTPSServer;
@@ -334,4 +334,4 @@ abstract class OcppEndpoint<
 }
 
 export default OcppEndpoint;
-export { OcppEndpointEvents, EndpointOptions };
+export { EndpointEvents, EndpointOptions };
