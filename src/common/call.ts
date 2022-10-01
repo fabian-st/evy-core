@@ -9,7 +9,7 @@ import OcppMessage, {
 } from './message';
 import { InboundMessageHandler, ResponseHandler } from './handler';
 
-interface CallMessage<
+interface Call<
   TAction extends OcppAction = OcppAction,
   TPayload extends Payload = Payload
 > extends OcppMessage {
@@ -25,7 +25,7 @@ class InboundCall<
     TResponse extends OutboundCallResult<TResponsePayload> = OutboundCallResult<TResponsePayload>
   >
   extends RespondableMessage<TResponse>
-  implements CallMessage<TAction, TPayload>
+  implements Call<TAction, TPayload>
 {
   type: MessageType.CALL;
   action: TAction;
@@ -52,7 +52,7 @@ class OutboundCall<
     TResponse extends InboundCallResult<TResponsePayload> = InboundCallResult<TResponsePayload>
   >
   extends ResultingMessage<TResponse>
-  implements CallMessage<TAction, TPayload>
+  implements Call<TAction, TPayload>
 {
   type: MessageType.CALL;
   action: TAction;
@@ -72,5 +72,5 @@ class OutboundCall<
   }
 }
 
-export default CallMessage;
+export default Call;
 export { InboundCall, OutboundCall };
