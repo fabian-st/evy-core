@@ -1,4 +1,4 @@
-import { OutboundOcppCallResult } from '../../src/common/callresult';
+import { OutboundCallResult } from '../../src/common/callresult';
 import { InboundMessageHandler } from '../../src/common/handler';
 import { BootNotificationRequest } from '../../src/types/ocpp/1.6/messages/BootNotification';
 
@@ -9,7 +9,7 @@ class BootNotificationHandler extends InboundMessageHandler {
     }
 
     message.respond(
-      new OutboundOcppCallResult(message.sender, message.id, {
+      new OutboundCallResult(message.sender, message.id, {
         currentTime: new Date(),
         interval: 120,
         status: 'Accepted',

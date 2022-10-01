@@ -1,5 +1,5 @@
 import { InboundOcppCall } from '../../../../common/call';
-import { OutboundOcppCallResult } from '../../../../common/callresult';
+import { OutboundCallResult } from '../../../../common/callresult';
 
 declare type HeartbeatRequest = InboundOcppCall<
   'Heartbeat',
@@ -8,8 +8,7 @@ declare type HeartbeatRequest = InboundOcppCall<
   HeartbeatResponse
 >;
 
-declare type HeartbeatResponse =
-  OutboundOcppCallResult<HeartbeatResponsePayload>;
+declare type HeartbeatResponse = OutboundCallResult<HeartbeatResponsePayload>;
 
 declare type HeartbeatResponsePayload = {
   currentTime: Date;

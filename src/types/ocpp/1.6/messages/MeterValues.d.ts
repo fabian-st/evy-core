@@ -1,5 +1,5 @@
 import { InboundOcppCall } from '../../../../common/call';
-import { OutboundOcppCallResult } from '../../../../common/callresult';
+import { OutboundCallResult } from '../../../../common/callresult';
 import MeterValue from '../structs/MeterValue';
 
 declare type MeterValuesRequest = InboundOcppCall<
@@ -9,7 +9,7 @@ declare type MeterValuesRequest = InboundOcppCall<
   MeterValuesResponse
 >;
 
-declare type MeterValuesResponse = OutboundOcppCallResult<{}>;
+declare type MeterValuesResponse = OutboundCallResult<{}>;
 
 declare type MeterValuesRequestPayload = {
   connectorId: number;

@@ -15,10 +15,7 @@ import OcppEndpoint, { OcppEndpointConfig } from '../common/endpoint';
 import { OcppClient, OcppSessionService } from '../common/session';
 import { InboundOcppCall, OutboundOcppCall } from '../common/call';
 
-import {
-  InboundCallResult,
-  OutboundOcppCallResult,
-} from '../common/callresult';
+import { InboundCallResult, OutboundCallResult } from '../common/callresult';
 
 import {
   InboundOcppCallError,
@@ -108,7 +105,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
       const messageArr: any[] = [message.type, message.id];
       if (message instanceof OutboundOcppCall) {
         messageArr.push(message.action, message.data);
-      } else if (message instanceof OutboundOcppCallResult) {
+      } else if (message instanceof OutboundCallResult) {
         messageArr.push(message.data);
       } else if (message instanceof OutboundOcppCallError) {
         messageArr.push(message.code, message.description, message.details);
@@ -117,7 +114,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
       if (
         this.config.schemaValidation &&
         (message instanceof OutboundOcppCall ||
-          message instanceof OutboundOcppCallResult)
+          message instanceof OutboundCallResult)
       ) {
         const dateToString = (key: string, value: string) => value;
         const rawData = JSON.parse(JSON.stringify(message.data), dateToString);

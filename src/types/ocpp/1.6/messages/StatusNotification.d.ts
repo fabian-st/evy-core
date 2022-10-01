@@ -1,5 +1,5 @@
 import { InboundOcppCall } from '../../../../common/call';
-import { OutboundOcppCallResult } from '../../../../common/callresult';
+import { OutboundCallResult } from '../../../../common/callresult';
 
 declare type StatusNotificationRequest = InboundOcppCall<
   'StatusNotification',
@@ -8,7 +8,7 @@ declare type StatusNotificationRequest = InboundOcppCall<
   StatusNotificationResponse
 >;
 
-declare type StatusNotificationResponse = OutboundOcppCallResult<{}>;
+declare type StatusNotificationResponse = OutboundCallResult<{}>;
 
 declare type StatusNofificationRequestPayload = {
   connectorId: number;

@@ -1,5 +1,5 @@
 import { InboundOcppCall } from '../../../../common/call';
-import { OutboundOcppCallResult } from '../../../../common/callresult';
+import { OutboundCallResult } from '../../../../common/callresult';
 
 declare type BootNotificationRequest = InboundOcppCall<
   'BootNotification',
@@ -21,7 +21,7 @@ declare type BootNotificationRequestPayload = {
 };
 
 declare type BootNotificationResponse =
-  OutboundOcppCallResult<BootNotificationResponsePayload>;
+  OutboundCallResult<BootNotificationResponsePayload>;
 
 declare type BootNotificationResponsePayload = {
   currentTime: Date;

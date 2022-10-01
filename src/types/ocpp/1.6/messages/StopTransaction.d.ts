@@ -1,5 +1,5 @@
 import { InboundOcppCall } from '../../../../common/call';
-import { OutboundOcppCallResult } from '../../../../common/callresult';
+import { OutboundCallResult } from '../../../../common/callresult';
 import IdToken from '../structs/IdToken';
 import MeterValue from '../structs/MeterValue';
 import IdTagInfo from '../structs/IdTagInfo';
@@ -36,7 +36,7 @@ declare type Reason =
   | 'DeAuthorized';
 
 declare type StopTransactionResponse =
-  OutboundOcppCallResult<StopTransactionResponsePayload>;
+  OutboundCallResult<StopTransactionResponsePayload>;
 
 declare type StopTransactionResponsePayload = {
   idTagInfo: IdTagInfo;

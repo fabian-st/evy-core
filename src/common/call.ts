@@ -1,7 +1,7 @@
 import { OcppClient } from './session';
 import OcppMessageType from '../types/ocpp/message-type';
 import OcppAction from '../types/ocpp/action';
-import { InboundCallResult, OutboundOcppCallResult } from './callresult';
+import { InboundCallResult, OutboundCallResult } from './callresult';
 import OcppMessage, {
   Payload,
   RespondableOcppMessage,
@@ -22,7 +22,7 @@ class InboundOcppCall<
     TAction extends OcppAction = OcppAction,
     TPayload extends Payload = Payload,
     TResponsePayload extends Payload = Payload,
-    TResponse extends OutboundOcppCallResult<TResponsePayload> = OutboundOcppCallResult<TResponsePayload>
+    TResponse extends OutboundCallResult<TResponsePayload> = OutboundCallResult<TResponsePayload>
   >
   extends RespondableOcppMessage<TResponse>
   implements OcppCallMessage<TAction, TPayload>

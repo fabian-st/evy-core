@@ -1,4 +1,4 @@
-import { OutboundOcppCallResult } from '../../src/common/callresult';
+import { OutboundCallResult } from '../../src/common/callresult';
 import { InboundMessageHandler } from '../../src/common/handler';
 import { AuthorizeRequest } from '../../src/types/ocpp/1.6/messages/Authorize';
 
@@ -9,7 +9,7 @@ class HeartbeatHandler extends InboundMessageHandler {
     }
 
     message.respond(
-      new OutboundOcppCallResult(message.sender, message.id, {
+      new OutboundCallResult(message.sender, message.id, {
         idTagInfo: {
           status: 'Accepted',
         },

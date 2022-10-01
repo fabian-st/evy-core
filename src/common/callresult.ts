@@ -28,7 +28,7 @@ class InboundCallResult<TPayload extends Payload = Payload>
   }
 }
 
-class OutboundOcppCallResult<TPayload extends Payload = Payload>
+class OutboundCallResult<TPayload extends Payload = Payload>
   extends OutboundMessage
   implements OcppCallResultMessage<TPayload>
 {
@@ -44,4 +44,4 @@ class OutboundOcppCallResult<TPayload extends Payload = Payload>
 }
 
 export default OcppCallResultMessage;
-export { InboundCallResult, OutboundOcppCallResult };
+export { InboundCallResult, OutboundCallResult };
