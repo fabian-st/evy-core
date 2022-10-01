@@ -13,17 +13,13 @@ import merge from 'lodash.merge';
 
 import OcppEndpoint, { EndpointOptions } from '../common/endpoint';
 import { Client, SessionService } from '../common/session';
+import { InboundMessage, OutboundMessage, Payload } from '../common/message';
 import { InboundCall, OutboundCall } from '../common/call';
-
 import { InboundCallResult, OutboundCallResult } from '../common/callresult';
-
 import { InboundCallError, OutboundCallError } from '../common/callerror';
-
 import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
 import MessageType from '../types/ocpp/type';
 import OcppAction from '../types/ocpp/action';
-
-import { InboundMessage, OutboundMessage, Payload } from '../common/message';
 
 import {
   InboundMessageHandler,
@@ -33,7 +29,7 @@ import {
 } from '../common/handler';
 
 type WsOptions = EndpointOptions & {
-  wsOptions?: WSOptions;
+  wsServerOptions?: WSOptions;
   route?: string;
   protocols?: Readonly<ProtocolVersion[]>;
   basicAuth?: boolean;
@@ -63,7 +59,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
       sessionService,
       logger
     );
-    this.wsServer = new WSServer(this.config.wsOptions);
+    this.wsServer = new WSServer(this.config.wsServerOptions);
     this.httpServer.on('upgrade', this.onHttpUpgrade);
     this.wsServer.on('connection', this.onWsConnected);
 
@@ -75,7 +71,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
     const schemaBase = path.join(__dirname, '../../../var/jsonschema');
 
     const config: WsOptions = {
-      wsOptions: { noServer: true },
+      wsServerOptions: { noServer: true },
       route: 'ocpp',
       protocols: ProtocolVersions,
       basicAuth: true,
