@@ -24,7 +24,7 @@ import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
 import {
   AsyncHandler,
   AuthenticationHandler,
-  OcppAuthenticationRequest,
+  AuthenticationRequest,
   InboundMessageHandler,
   OutboundMessageHandler,
 } from './handler';
@@ -255,7 +255,7 @@ abstract class OcppEndpoint<
     this.logger.trace(err.stack);
   };
 
-  protected async onAuthenticationAttempt(request: OcppAuthenticationRequest) {
+  protected async onAuthenticationAttempt(request: AuthenticationRequest) {
     this.logger.debug(
       `Client with id ${request.client.id} attempting authentication`
     );
@@ -264,14 +264,14 @@ abstract class OcppEndpoint<
     await this.authenticationHandlers[0].handle(request);
   }
 
-  protected onAuthenticationFailure(request: OcppAuthenticationRequest) {
+  protected onAuthenticationFailure(request: AuthenticationRequest) {
     this.logger.warn(
       `Client with id ${request.client.id} failed to authenticate`
     );
     this.emit('client_rejected', request.client);
   }
 
-  protected async onAuthenticationSuccess(request: OcppAuthenticationRequest) {
+  protected async onAuthenticationSuccess(request: AuthenticationRequest) {
     if (await this.hasSession(request.client.id)) {
       this.logger.warn(
         oneLine`onAuthenticationSuccess() was called but client

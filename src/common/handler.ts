@@ -4,10 +4,10 @@ import OcppMessage, { InboundMessage, OutboundMessage } from './message';
 import ProtocolVersion from '../types/ocpp/version';
 
 abstract class AuthenticationHandler<
-  TRequest extends OcppAuthenticationRequest = OcppAuthenticationRequest
+  TRequest extends AuthenticationRequest = AuthenticationRequest
 > extends AsyncHandler<TRequest> {}
 
-abstract class OcppAuthenticationRequest {
+abstract class AuthenticationRequest {
   private _accepted: boolean;
   private _rejected: boolean;
   private _protocol: ProtocolVersion;
@@ -78,7 +78,7 @@ type ResponseHandler<TResponse extends OutboundMessage> = (
 export {
   AsyncHandler,
   AuthenticationHandler,
-  OcppAuthenticationRequest,
+  AuthenticationRequest,
   InboundMessageHandler,
   OutboundMessageHandler,
   ResponseHandler,

@@ -1,10 +1,10 @@
 import {
   AuthenticationHandler,
-  OcppAuthenticationRequest,
+  AuthenticationRequest,
 } from '../../src/common/handler';
 
 class AuthenticationHandler extends AuthenticationHandler {
-  async handle(request: OcppAuthenticationRequest) {
+  async handle(request: AuthenticationRequest) {
     request.accept();
     return await super.handle(request);
   }

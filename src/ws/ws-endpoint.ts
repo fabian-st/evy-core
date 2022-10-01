@@ -28,7 +28,7 @@ import { InboundMessage, OutboundMessage, Payload } from '../common/message';
 import {
   InboundMessageHandler,
   AuthenticationHandler,
-  OcppAuthenticationRequest,
+  AuthenticationRequest,
   OutboundMessageHandler,
 } from '../common/handler';
 
@@ -194,7 +194,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
 
     const { id, password, protocols } = requestProperties;
 
-    const authRequest = new (class extends OcppAuthenticationRequest {
+    const authRequest = new (class extends AuthenticationRequest {
       client = new OcppClient(id);
       protocols = protocols;
       password = password ?? undefined;

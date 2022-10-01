@@ -1,6 +1,6 @@
 import { Logger } from 'ts-log';
 
-import { AuthenticationHandler, OcppAuthenticationRequest } from '../handler';
+import { AuthenticationHandler, AuthenticationRequest } from '../handler';
 import { SessionService } from '../session';
 
 class SessionExistsHandler extends AuthenticationHandler {
@@ -13,7 +13,7 @@ class SessionExistsHandler extends AuthenticationHandler {
     this.logger = logger;
   }
 
-  async handle(request: OcppAuthenticationRequest) {
+  async handle(request: AuthenticationRequest) {
     if (await this.sessionService.has(request.client.id)) {
       this.logger.warn(
         `Client with id ${request.client.id} is already connected`
