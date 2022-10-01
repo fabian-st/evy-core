@@ -31,11 +31,7 @@ import OcppProtocolVersion, {
 import OcppMessageType from '../types/ocpp/message-type';
 import OcppAction from '../types/ocpp/action';
 
-import {
-  InboundMessage,
-  OcppMessagePayload,
-  OutboundMessage,
-} from '../common/message';
+import { InboundMessage, OutboundMessage, Payload } from '../common/message';
 
 import {
   InboundMessageHandler,
@@ -473,7 +469,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
       throw new Error('Missing or invalid error code or description field');
     }
 
-    const payload: OcppMessagePayload = isCallMessage
+    const payload: Payload = isCallMessage
       ? message[3]
       : isCallResultMessage
       ? message[2]
@@ -493,7 +489,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
   protected async validateSchema(
     type: OcppMessageType.CALL | OcppMessageType.CALLRESULT,
     action: OcppAction,
-    payload: OcppMessagePayload,
+    payload: Payload,
     protocol: OcppProtocolVersion
   ) {
     let schema: Record<string, any>;

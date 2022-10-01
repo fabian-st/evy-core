@@ -10,7 +10,7 @@ type OcppMessageValue =
   | { [x: string]: OcppMessageValue }
   | Array<OcppMessageValue>;
 
-type OcppMessagePayload = OcppMessageValue | null | {};
+type Payload = OcppMessageValue | null | {};
 
 abstract class OcppMessage {
   readonly type!: OcppMessageType;
@@ -134,7 +134,7 @@ abstract class ResultingOcppMessage<
 
 export default OcppMessage;
 export {
-  OcppMessagePayload,
+  Payload,
   InboundMessage,
   OutboundMessage,
   RespondableOcppMessage,

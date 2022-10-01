@@ -2,7 +2,7 @@ import { OcppClient } from './session';
 import OcppMessageType from '../types/ocpp/message-type';
 import OcppAction from '../types/ocpp/action';
 import OcppMessage, {
-  OcppMessagePayload,
+  Payload,
   InboundMessage,
   OutboundMessage,
 } from './message';
@@ -25,7 +25,7 @@ interface OcppCallErrorMessage extends OcppMessage {
   readonly type: OcppMessageType.CALLERROR;
   code: RPCError;
   description: string;
-  details: OcppMessagePayload;
+  details: Payload;
 }
 
 class InboundOcppCallError
@@ -35,14 +35,14 @@ class InboundOcppCallError
   readonly type: OcppMessageType.CALLERROR;
   code: RPCError;
   description: string;
-  details: OcppMessagePayload;
+  details: Payload;
 
   constructor(
     sender: OcppClient,
     id: string,
     code: RPCError = 'GenericError',
     description = '',
-    details: OcppMessagePayload = {}
+    details: Payload = {}
   ) {
     super(sender, id);
     this.type = OcppMessageType.CALLERROR;
@@ -59,14 +59,14 @@ class OutboundOcppCallError
   readonly type: OcppMessageType.CALLERROR;
   code: RPCError;
   description: string;
-  details: OcppMessagePayload;
+  details: Payload;
 
   constructor(
     recipient: OcppClient,
     id: string,
     code: RPCError = 'GenericError',
     description = '',
-    details: OcppMessagePayload = {}
+    details: Payload = {}
   ) {
     super(recipient, id);
     this.type = OcppMessageType.CALLERROR;
