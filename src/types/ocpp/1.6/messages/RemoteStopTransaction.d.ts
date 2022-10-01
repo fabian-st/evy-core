@@ -1,5 +1,5 @@
 import { OutboundOcppCall } from '../../../../common/call';
-import { InboundOcppCallResult } from '../../../../common/OcppCallResultMessage';
+import { InboundOcppCallResult } from '../../../../common/callresult';
 import RemoteStartStopStatus from '../structs/RemoteStartStopStatus';
 
 declare type RemoteStopTransactionRequest = OutboundOcppCall<

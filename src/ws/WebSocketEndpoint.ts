@@ -18,7 +18,7 @@ import { InboundOcppCall, OutboundOcppCall } from '../common/call';
 import {
   InboundOcppCallResult,
   OutboundOcppCallResult,
-} from '../common/OcppCallResultMessage';
+} from '../common/callresult';
 
 import {
   InboundOcppCallError,

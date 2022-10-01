@@ -1,4 +1,4 @@
-import { OutboundOcppCallResult } from '../../src/common/OcppCallResultMessage';
+import { OutboundOcppCallResult } from '../../src/common/callresult';
 import { InboundOcppMessageHandler } from '../../src/common/OcppHandlers';
 import { AuthorizeRequest } from '../../src/types/ocpp/1.6/messages/Authorize';
 

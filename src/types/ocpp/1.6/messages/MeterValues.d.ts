@@ -1,5 +1,5 @@
 import { InboundOcppCall } from '../../../../common/call';
-import { OutboundOcppCallResult } from '../../../../common/OcppCallResultMessage';
+import { OutboundOcppCallResult } from '../../../../common/callresult';
 import MeterValue from '../structs/MeterValue';
 
 declare type MeterValuesRequest = InboundOcppCall<
