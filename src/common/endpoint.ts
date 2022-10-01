@@ -15,7 +15,7 @@ import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/session-local';
 import OcppMessageType from '../types/ocpp/message-type';
 import { InboundMessage, OutboundMessage } from './message';
-import { OutboundOcppCallError } from './callerror';
+import { OutboundCallError } from './callerror';
 import OcppAction, { OcppActions } from '../types/ocpp/action';
 import * as Handlers from './handlers';
 
@@ -322,7 +322,7 @@ abstract class OcppEndpoint<
     try {
       await this.inboundMessageHandlers[0].handle(message);
     } catch (err: any) {
-      if (err instanceof OutboundOcppCallError) {
+      if (err instanceof OutboundCallError) {
         await this.sendMessage(err);
       } else {
         this.logger.error(

@@ -5,7 +5,7 @@ import { OcppEndpointConfig } from '../endpoint';
 import OcppMessageType from '../../types/ocpp/message-type';
 import { InboundMessage, OutboundMessage } from '../message';
 import { InboundOcppCall, OutboundOcppCall } from '../call';
-import { OutboundOcppCallError } from '../callerror';
+import { OutboundCallError } from '../callerror';
 import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 
 class InboundActionsAllowedHandler extends InboundMessageHandler {
@@ -28,7 +28,7 @@ class InboundActionsAllowedHandler extends InboundMessageHandler {
         message with unsupported action: ${message.action}`
       );
 
-      throw new OutboundOcppCallError(
+      throw new OutboundCallError(
         message.sender,
         message.id,
         'NotImplemented',

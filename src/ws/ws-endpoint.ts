@@ -17,7 +17,7 @@ import { InboundOcppCall, OutboundOcppCall } from '../common/call';
 
 import { InboundCallResult, OutboundCallResult } from '../common/callresult';
 
-import { InboundCallError, OutboundOcppCallError } from '../common/callerror';
+import { InboundCallError, OutboundCallError } from '../common/callerror';
 
 import OcppProtocolVersion, {
   OcppProtocolVersions,
@@ -104,7 +104,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
         messageArr.push(message.action, message.data);
       } else if (message instanceof OutboundCallResult) {
         messageArr.push(message.data);
-      } else if (message instanceof OutboundOcppCallError) {
+      } else if (message instanceof OutboundCallError) {
         messageArr.push(message.code, message.description, message.details);
       }
 
@@ -330,7 +330,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
         );
         this.logger.trace(err.stack);
 
-        const errorResponse = new OutboundOcppCallError(
+        const errorResponse = new OutboundCallError(
           client,
           randomBytes(16).toString('hex'),
           'ProtocolError',

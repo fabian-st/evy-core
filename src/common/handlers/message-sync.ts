@@ -5,7 +5,7 @@ import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { OcppSessionService } from '../session';
 import { InboundMessage, OutboundMessage } from '../message';
 import { InboundOcppCall } from '../call';
-import { OutboundOcppCallError } from '../callerror';
+import { OutboundCallError } from '../callerror';
 import OcppMessageType from '../../types/ocpp/message-type';
 
 class InboundMessageSynchronicityHandler extends InboundMessageHandler {
@@ -68,7 +68,7 @@ class InboundMessageSynchronicityHandler extends InboundMessageHandler {
     }
 
     if (error) {
-      throw new OutboundOcppCallError(
+      throw new OutboundCallError(
         message.sender,
         message.id,
         'ProtocolError',

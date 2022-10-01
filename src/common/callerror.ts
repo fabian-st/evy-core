@@ -49,7 +49,7 @@ class InboundCallError extends InboundMessage implements OcppCallErrorMessage {
   }
 }
 
-class OutboundOcppCallError
+class OutboundCallError
   extends OutboundMessage
   implements OcppCallErrorMessage
 {
@@ -74,4 +74,4 @@ class OutboundOcppCallError
 }
 
 export default OcppCallErrorMessage;
-export { InboundCallError, OutboundOcppCallError, RPCError };
+export { InboundCallError, OutboundCallError, RPCError };
