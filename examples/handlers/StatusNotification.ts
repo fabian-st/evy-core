@@ -1,8 +1,8 @@
 import { OutboundOcppCallResult } from '../../src/common/callresult';
-import { InboundOcppMessageHandler } from '../../src/common/handler';
+import { InboundMessageHandler } from '../../src/common/handler';
 import { StatusNotificationRequest } from '../../src/types/ocpp/1.6/messages/StatusNotification';
 
-class StatusNotificationHandler extends InboundOcppMessageHandler {
+class StatusNotificationHandler extends InboundMessageHandler {
   async handle(message: StatusNotificationRequest) {
     if (message.action !== 'StatusNotification') {
       return await super.handle(message);

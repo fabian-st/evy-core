@@ -27,7 +27,7 @@ import {
   AsyncHandler,
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
-  InboundOcppMessageHandler,
+  InboundMessageHandler,
   OutboundOcppMessageHandler,
 } from './handler';
 
@@ -65,7 +65,7 @@ abstract class OcppEndpoint<
   protected sessionService: OcppSessionService;
   protected logger: Logger;
   protected authenticationHandlers: OcppAuthenticationHandler[];
-  protected inboundMessageHandlers: InboundOcppMessageHandler[];
+  protected inboundMessageHandlers: InboundMessageHandler[];
   protected outboundMessageHandlers: OutboundOcppMessageHandler[];
 
   protected abstract hasSession(clientId: string): boolean;
@@ -75,7 +75,7 @@ abstract class OcppEndpoint<
   constructor(
     config: TConfig,
     authenticationHandlers: OcppAuthenticationHandler[],
-    inboundMessageHandlers: InboundOcppMessageHandler[],
+    inboundMessageHandlers: InboundMessageHandler[],
     outboundMessageHandlers: OutboundOcppMessageHandler[] = [],
     sessionService: OcppSessionService = new LocalSessionService(),
     logger: Logger = winstonLogger
@@ -146,7 +146,7 @@ abstract class OcppEndpoint<
           ),
           new Handlers.InboundPendingMessageHandler(this.sessionService),
         ],
-        suffix: <InboundOcppMessageHandler[]>[],
+        suffix: <InboundMessageHandler[]>[],
       },
       outboundMessage: {
         prefix: [

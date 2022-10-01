@@ -1,8 +1,8 @@
 import { OutboundOcppCallResult } from '../../src/common/callresult';
-import { InboundOcppMessageHandler } from '../../src/common/handler';
+import { InboundMessageHandler } from '../../src/common/handler';
 import { MeterValuesRequest } from '../../src/types/ocpp/1.6/messages/MeterValues';
 
-class MeterValuesHandler extends InboundOcppMessageHandler {
+class MeterValuesHandler extends InboundMessageHandler {
   async handle(message: MeterValuesRequest) {
     if (message.action !== 'MeterValues') {
       return await super.handle(message);

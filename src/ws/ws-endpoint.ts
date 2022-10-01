@@ -38,7 +38,7 @@ import {
 } from '../common/message';
 
 import {
-  InboundOcppMessageHandler,
+  InboundMessageHandler,
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
   OutboundOcppMessageHandler,
@@ -62,7 +62,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
   constructor(
     config: WebSocketConfig,
     authenticationHandlers: OcppAuthenticationHandler[],
-    inboundMessageHandlers: InboundOcppMessageHandler[],
+    inboundMessageHandlers: InboundMessageHandler[],
     outboundMessageHandlers?: OutboundOcppMessageHandler[],
     sessionService?: OcppSessionService,
     logger?: Logger

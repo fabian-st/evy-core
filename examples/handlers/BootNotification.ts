@@ -1,8 +1,8 @@
 import { OutboundOcppCallResult } from '../../src/common/callresult';
-import { InboundOcppMessageHandler } from '../../src/common/handler';
+import { InboundMessageHandler } from '../../src/common/handler';
 import { BootNotificationRequest } from '../../src/types/ocpp/1.6/messages/BootNotification';
 
-class BootNotificationHandler extends InboundOcppMessageHandler {
+class BootNotificationHandler extends InboundMessageHandler {
   async handle(message: BootNotificationRequest) {
     if (message.action !== 'BootNotification') {
       return await super.handle(message);

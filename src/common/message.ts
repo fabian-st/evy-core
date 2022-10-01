@@ -1,6 +1,6 @@
 import OcppMessageType from '../types/ocpp/message-type';
 import { OcppClient } from './session';
-import { InboundOcppMessageHandler, ResponseHandler } from './handler';
+import { InboundMessageHandler, ResponseHandler } from './handler';
 
 type OcppMessageValue =
   | string
@@ -98,13 +98,13 @@ abstract class RespondableOcppMessage<
 abstract class ResultingOcppMessage<
   TResponse extends InboundOcppMessage
 > extends OutboundOcppMessage {
-  private _responseHandler?: InboundOcppMessageHandler<TResponse>;
+  private _responseHandler?: InboundMessageHandler<TResponse>;
   private _response?: TResponse;
 
   constructor(
     recipient: OcppClient,
     id: string,
-    responseHandler?: InboundOcppMessageHandler<TResponse>
+    responseHandler?: InboundMessageHandler<TResponse>
   ) {
     super(recipient, id);
     this._responseHandler = responseHandler || null;
@@ -119,7 +119,7 @@ abstract class ResultingOcppMessage<
     await this._responseHandler.handle(response);
   }
 
-  set responseHandler(handler: InboundOcppMessageHandler<TResponse>) {
+  set responseHandler(handler: InboundMessageHandler<TResponse>) {
     this._responseHandler = handler;
   }
 

@@ -1,8 +1,8 @@
 import { OutboundOcppCallResult } from '../../src/common/callresult';
-import { InboundOcppMessageHandler } from '../../src/common/handler';
+import { InboundMessageHandler } from '../../src/common/handler';
 import { StartTransactionRequest } from '../../src/types/ocpp/1.6/messages/StartTransaction';
 
-class StartTransactionHandler extends InboundOcppMessageHandler {
+class StartTransactionHandler extends InboundMessageHandler {
   async handle(message: StartTransactionRequest) {
     if (message.action !== 'StartTransaction') {
       return await super.handle(message);

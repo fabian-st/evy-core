@@ -7,7 +7,7 @@ import OcppMessage, {
   RespondableOcppMessage,
   ResultingOcppMessage,
 } from './message';
-import { InboundOcppMessageHandler, ResponseHandler } from './handler';
+import { InboundMessageHandler, ResponseHandler } from './handler';
 
 interface OcppCallMessage<
   TAction extends OcppAction = OcppAction,
@@ -63,7 +63,7 @@ class OutboundOcppCall<
     id: string,
     action: TAction,
     data: TPayload,
-    responseHandler?: InboundOcppMessageHandler<TResponse>
+    responseHandler?: InboundMessageHandler<TResponse>
   ) {
     super(recipient, id, responseHandler);
     this.type = OcppMessageType.CALL;
