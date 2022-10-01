@@ -55,7 +55,7 @@ class OcppClient {
   }
 }
 
-interface OcppSessionService {
+interface SessionService {
   create(): Promise<void>;
   destroy(): Promise<void>;
   count(): Promise<number>;
@@ -67,4 +67,4 @@ interface OcppSessionService {
 }
 
 export default OcppSession;
-export { OcppClient, OcppSessionService };
+export { OcppClient, SessionService };

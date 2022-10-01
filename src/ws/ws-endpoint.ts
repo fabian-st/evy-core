@@ -12,7 +12,7 @@ import basicAuth from 'basic-auth';
 import merge from 'lodash.merge';
 
 import OcppEndpoint, { OcppEndpointConfig } from '../common/endpoint';
-import { OcppClient, OcppSessionService } from '../common/session';
+import { OcppClient, SessionService } from '../common/session';
 import { InboundCall, OutboundCall } from '../common/call';
 
 import { InboundCallResult, OutboundCallResult } from '../common/callresult';
@@ -52,7 +52,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
     authenticationHandlers: OcppAuthenticationHandler[],
     inboundMessageHandlers: InboundMessageHandler[],
     outboundMessageHandlers?: OutboundMessageHandler[],
-    sessionService?: OcppSessionService,
+    sessionService?: SessionService,
     logger?: Logger
   ) {
     super(

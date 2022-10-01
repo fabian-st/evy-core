@@ -11,7 +11,7 @@ import { oneLine } from 'common-tags';
 import merge from 'lodash.merge';
 
 import winstonLogger from './util/logger';
-import OcppSession, { OcppClient, OcppSessionService } from './session';
+import OcppSession, { OcppClient, SessionService } from './session';
 import LocalSessionService from './services/session-local';
 import MessageType from '../types/ocpp/type';
 import { InboundMessage, OutboundMessage } from './message';
@@ -60,7 +60,7 @@ abstract class OcppEndpoint<
   protected _config: TConfig;
 
   protected httpServer: HTTPServer | HTTPSServer;
-  protected sessionService: OcppSessionService;
+  protected sessionService: SessionService;
   protected logger: Logger;
   protected authenticationHandlers: OcppAuthenticationHandler[];
   protected inboundMessageHandlers: InboundMessageHandler[];
@@ -75,7 +75,7 @@ abstract class OcppEndpoint<
     authenticationHandlers: OcppAuthenticationHandler[],
     inboundMessageHandlers: InboundMessageHandler[],
     outboundMessageHandlers: OutboundMessageHandler[] = [],
-    sessionService: OcppSessionService = new LocalSessionService(),
+    sessionService: SessionService = new LocalSessionService(),
     logger: Logger = winstonLogger
   ) {
     super();

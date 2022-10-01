@@ -4,13 +4,13 @@ import {
   OcppAuthenticationHandler,
   OcppAuthenticationRequest,
 } from '../handler';
-import { OcppSessionService } from '../session';
+import { SessionService } from '../session';
 
 class SessionExistsHandler extends OcppAuthenticationHandler {
-  private sessionService: OcppSessionService;
+  private sessionService: SessionService;
   private logger: Logger;
 
-  constructor(sessionService: OcppSessionService, logger: Logger) {
+  constructor(sessionService: SessionService, logger: Logger) {
     super();
     this.sessionService = sessionService;
     this.logger = logger;

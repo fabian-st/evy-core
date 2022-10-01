@@ -1,6 +1,6 @@
-import OcppSession, { OcppSessionService } from '../session';
+import OcppSession, { SessionService } from '../session';
 
-class LocalSessionService implements OcppSessionService {
+class LocalSessionService implements SessionService {
   private sessions: Map<string, OcppSession>;
 
   async create() {
