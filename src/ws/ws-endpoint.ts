@@ -16,7 +16,7 @@ import { OcppClient, OcppSessionService } from '../common/session';
 import { InboundOcppCall, OutboundOcppCall } from '../common/call';
 
 import {
-  InboundOcppCallResult,
+  InboundCallResult,
   OutboundOcppCallResult,
 } from '../common/callresult';
 
@@ -399,7 +399,7 @@ class WebSocketEndpoint extends OcppEndpoint<WebSocketConfig> {
           break;
 
         case OcppMessageType.CALLRESULT:
-          message = new InboundOcppCallResult(client, id, payload);
+          message = new InboundCallResult(client, id, payload);
           break;
 
         case OcppMessageType.CALLERROR:

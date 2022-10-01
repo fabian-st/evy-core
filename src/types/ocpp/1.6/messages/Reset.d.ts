@@ -1,5 +1,5 @@
 import { OutboundOcppCall } from '../../../../common/call';
-import { InboundOcppCallResult } from '../../../../common/callresult';
+import { InboundCallResult } from '../../../../common/callresult';
 
 declare type ResetRequest = OutboundOcppCall<
   'Reset',
@@ -14,7 +14,7 @@ declare type ResetRequestPayload = {
 
 declare type ResetType = 'Hard' | 'Soft';
 
-declare type ResetResponse = InboundOcppCallResult<ResetResponsePayload>;
+declare type ResetResponse = InboundCallResult<ResetResponsePayload>;
 
 declare type ResetResponsePayload = {
   status: ResetStatus;

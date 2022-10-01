@@ -1,5 +1,5 @@
 import { OutboundOcppCall } from '../../../../common/call';
-import { InboundOcppCallResult } from '../../../../common/callresult';
+import { InboundCallResult } from '../../../../common/callresult';
 
 declare type GetConfigurationRequest = OutboundOcppCall<
   'GetConfiguration',
@@ -13,7 +13,7 @@ declare type GetConfigurationRequestPayload = {
 };
 
 declare type GetConfigurationResponse =
-  InboundOcppCallResult<GetConfigurationResponsePayload>;
+  InboundCallResult<GetConfigurationResponsePayload>;
 
 declare type GetConfigurationResponsePayload = {
   configurationKey?: [KeyValue];

@@ -1,5 +1,5 @@
 import { OutboundOcppCall } from '../../../../common/call';
-import { InboundOcppCallResult } from '../../../../common/callresult';
+import { InboundCallResult } from '../../../../common/callresult';
 
 declare type ClearCacheRequest = OutboundOcppCall<
   'ClearCache',
@@ -8,8 +8,7 @@ declare type ClearCacheRequest = OutboundOcppCall<
   ClearCacheResponse
 >;
 
-declare type ClearCacheResponse =
-  InboundOcppCallResult<ClearCacheResponsePayload>;
+declare type ClearCacheResponse = InboundCallResult<ClearCacheResponsePayload>;
 
 declare type ClearCacheResponsePayload = {
   status: ClearCacheStatus;
