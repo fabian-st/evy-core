@@ -5,7 +5,7 @@ import { OcppEndpointConfig } from '../endpoint';
 import OcppMessageType from '../../types/ocpp/OcppMessageType';
 import { InboundOcppMessage, OutboundOcppMessage } from '../message';
 import { InboundOcppCall, OutboundOcppCall } from '../call';
-import { OutboundOcppCallError } from '../OcppCallErrorMessage';
+import { OutboundOcppCallError } from '../callerror';
 import {
   InboundOcppMessageHandler,
   OutboundOcppMessageHandler,

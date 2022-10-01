@@ -23,7 +23,7 @@ import {
 import {
   InboundOcppCallError,
   OutboundOcppCallError,
-} from '../common/OcppCallErrorMessage';
+} from '../common/callerror';
 
 import OcppProtocolVersion, {
   OcppProtocolVersions,

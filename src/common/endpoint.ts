@@ -15,7 +15,7 @@ import OcppSession, { OcppClient, OcppSessionService } from './session';
 import LocalSessionService from './services/LocalSessionService';
 import OcppMessageType from '../types/ocpp/OcppMessageType';
 import { InboundOcppMessage, OutboundOcppMessage } from './message';
-import { OutboundOcppCallError } from './OcppCallErrorMessage';
+import { OutboundOcppCallError } from './callerror';
 import OcppAction, { OcppActions } from '../types/ocpp/OcppAction';
 import * as Handlers from './handlers';
 
