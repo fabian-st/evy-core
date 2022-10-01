@@ -1,9 +1,9 @@
 /* eslint-disable no-case-declarations */
 
-import WebSocketEndpoint from '../src/ws/ws-endpoint';
+import WsEndpoint from '../src/ws/ws-endpoint';
 import * as Handlers from './handlers';
 
-const wsEndpoint = new WebSocketEndpoint(
+const wsEndpoint = new WsEndpoint(
   { basicAuth: false },
   [new Handlers.BasicAuthHandler()],
   [

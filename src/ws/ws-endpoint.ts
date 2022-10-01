@@ -42,7 +42,7 @@ type WsOptions = EndpointOptions & {
   schemaDir?: Map<ProtocolVersion[], string>;
 };
 
-class WebSocketEndpoint extends OcppEndpoint<WsOptions> {
+class WsEndpoint extends OcppEndpoint<WsOptions> {
   protected wsServer: WSServer;
   protected requestSchemas: Map<OcppAction, Record<string, any>>;
   protected responseSchemas: Map<OcppAction, Record<string, any>>;
@@ -554,5 +554,5 @@ class WebSocketEndpoint extends OcppEndpoint<WsOptions> {
   }
 }
 
-export default WebSocketEndpoint;
+export default WsEndpoint;
 export { WsOptions };
