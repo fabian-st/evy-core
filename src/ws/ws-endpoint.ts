@@ -42,7 +42,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
   protected responseSchemas: Map<OcppAction, Record<string, any>>;
 
   constructor(
-    config: WsOptions,
+    options: WsOptions,
     authenticationHandlers: AuthenticationHandler[],
     inboundMessageHandlers: InboundMessageHandler[],
     outboundMessageHandlers?: OutboundMessageHandler[],
@@ -50,14 +50,14 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
     logger?: Logger
   ) {
     super(
-      config,
+      options,
       authenticationHandlers,
       inboundMessageHandlers,
       outboundMessageHandlers,
       sessionService,
       logger
     );
-    this.wsServer = new WsServer(this.config.wsServerOptions);
+    this.wsServer = new WsServer(this.options.wsServerOptions);
     this.httpServer.on('upgrade', this.onHttpUpgrade);
     this.wsServer.on('connection', this.onWsConnected);
 
@@ -65,11 +65,10 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
     this.responseSchemas = new Map();
   }
 
-  protected get defaultConfig() {
+  protected get defaultOptions() {
     const schemaBase = path.join(__dirname, '../../../var/jsonschema');
 
-    const config: WsOptions = {
-      wsServerOptions: { noServer: true },
+    const options: WsOptions = {
       route: 'ocpp',
       protocols: ProtocolVersions,
       basicAuth: true,
@@ -81,9 +80,10 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
         // OCPP >= 2.0    /var/jsonschema/ocpp2.0.1
         [['ocpp2.0', 'ocpp2.0.1'], path.join(schemaBase, 'ocpp2.0.1')],
       ]),
+      wsServerOptions: { noServer: true },
     };
 
-    return merge(super.defaultConfig, config);
+    return merge(super.defaultOptions, options);
   }
 
   protected get sendMessageHandler() {
@@ -101,7 +101,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
       }
 
       if (
-        this.config.schemaValidation &&
+        this.options.schemaValidation &&
         (message instanceof OutboundCall ||
           message instanceof OutboundCallResult)
       ) {
@@ -247,21 +247,21 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
     const requestPath = path.parse(request.url);
     const clientId = requestPath.base;
 
-    const basicCredentials = this.config.basicAuth
+    const basicCredentials = this.options.basicAuth
       ? basicAuth(request)
       : undefined;
 
     const clientProtocols =
       request.headers['sec-websocket-protocol']?.split(',');
 
-    const supportedProtocols = this.config.protocols.filter(protocol =>
+    const supportedProtocols = this.options.protocols.filter(protocol =>
       clientProtocols?.includes(protocol)
     ) as ProtocolVersion[];
 
     const trimSlashesRegex = /^\/+|\/+$/g;
     if (
       requestPath.dir.replaceAll(trimSlashesRegex, '') !==
-      this.config.route.replaceAll(trimSlashesRegex, '')
+      this.options.route.replaceAll(trimSlashesRegex, '')
     ) {
       throw new Error(
         oneLine`Client with id ${clientId} attempted
@@ -278,12 +278,12 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
         attempted authentication with unsupported WebSocket
         subprotocol(s): ${clientProtocols}`
       );
-    } else if (this.config.basicAuth && !basicCredentials) {
+    } else if (this.options.basicAuth && !basicCredentials) {
       throw new Error(
         oneLine`Client with id ${clientId} attempted
         authentication without supplying BASIC credentials`
       );
-    } else if (this.config.basicAuth && basicCredentials.name !== clientId) {
+    } else if (this.options.basicAuth && basicCredentials.name !== clientId) {
       throw new Error(
         oneLine`Client attempted authentication with
         mismatching ids ${clientId} in request path and
@@ -345,7 +345,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
       } = messageProperties;
 
       if (
-        this.config.schemaValidation &&
+        this.options.schemaValidation &&
         (type === MessageType.CALL || type === MessageType.CALLRESULT)
       ) {
         const messageValidation = await this.validateSchema(
@@ -510,7 +510,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
     protocol: ProtocolVersion
   ) {
     let schemaDir: string;
-    this.config.schemaDir.forEach((dir, protocols) => {
+    this.options.schemaDir.forEach((dir, protocols) => {
       if (protocols.includes(protocol)) {
         schemaDir = dir;
       }

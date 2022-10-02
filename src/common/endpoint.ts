@@ -51,7 +51,7 @@ type EndpointEvents = {
 abstract class OcppEndpoint<
   TConfig extends EndpointOptions
 > extends (EventEmitter as new () => TypedEmitter<EndpointEvents>) {
-  protected _config: TConfig;
+  protected _options: TConfig;
 
   protected httpServer: HttpServer;
   protected sessionService: SessionService;
@@ -65,7 +65,7 @@ abstract class OcppEndpoint<
   protected abstract get sendMessageHandler(): OutboundMessageHandler;
 
   constructor(
-    config: TConfig,
+    options: TConfig,
     authenticationHandlers: AuthenticationHandler[],
     inboundMessageHandlers: InboundMessageHandler[],
     outboundMessageHandlers: OutboundMessageHandler[] = [],
@@ -73,11 +73,11 @@ abstract class OcppEndpoint<
     logger: Logger = winstonLogger
   ) {
     super();
-    this._config = merge(this.defaultConfig, config);
+    this._options = merge(this.defaultOptions, options);
 
-    this.httpServer = this.config.https
-      ? https.createServer(this.config.httpServerOptions)
-      : http.createServer(this.config.httpServerOptions);
+    this.httpServer = this.options.https
+      ? https.createServer(this.options.httpServerOptions)
+      : http.createServer(this.options.httpServerOptions);
     this.httpServer.on('error', this.onHttpError);
 
     this.sessionService = sessionService;
@@ -104,7 +104,7 @@ abstract class OcppEndpoint<
     ]);
   }
 
-  protected get defaultConfig() {
+  protected get defaultOptions() {
     return {
       port: process.env.NODE_ENV === 'development' ? 8080 : 80,
       hostname: 'localhost',
@@ -127,7 +127,7 @@ abstract class OcppEndpoint<
       },
       inboundMessage: {
         prefix: [
-          new Handlers.InboundActionsAllowedHandler(this.config, this.logger),
+          new Handlers.InboundActionsAllowedHandler(this.options, this.logger),
           new Handlers.InboundMessageSynchronicityHandler(
             this.sessionService,
             this.logger
@@ -138,7 +138,7 @@ abstract class OcppEndpoint<
       },
       outboundMessage: {
         prefix: [
-          new Handlers.OutboundActionsAllowedHandler(this.config, this.logger),
+          new Handlers.OutboundActionsAllowedHandler(this.options, this.logger),
         ],
         suffix: <OutboundMessageHandler[]>[
           this.sendMessageHandler,
@@ -148,8 +148,8 @@ abstract class OcppEndpoint<
     };
   }
 
-  public get config() {
-    return this._config;
+  public get options() {
+    return this._options;
   }
 
   public get isListening() {
@@ -165,19 +165,19 @@ abstract class OcppEndpoint<
       return;
     }
 
-    this.logger.info('Starting endpoint', this.config);
-    this.emit('server_starting', this.config);
+    this.logger.info('Starting endpoint', this.options);
+    this.emit('server_starting', this.options);
 
     this.httpServer.listen(
-      this.config.port,
-      this.config.hostname,
-      this.config.maxConnections,
+      this.options.port,
+      this.options.hostname,
+      this.options.maxConnections,
       () => {
         this.logger.info(
-          `Endpoint is listening on port ${this.config.port}`,
-          this.config
+          `Endpoint is listening on port ${this.options.port}`,
+          this.options
         );
-        this.emit('server_listening', this.config);
+        this.emit('server_listening', this.options);
       }
     );
   }
