@@ -1,7 +1,7 @@
 import { Logger } from 'ts-log';
 
-import { AuthenticationHandler, AuthenticationRequest } from '../handler';
 import { SessionService } from '../session';
+import { AuthenticationHandler, AuthenticationRequest } from '../handler';
 
 class SessionExistsHandler extends AuthenticationHandler {
   private sessionService: SessionService;

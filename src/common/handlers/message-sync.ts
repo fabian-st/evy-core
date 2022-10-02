@@ -1,12 +1,12 @@
 import { Logger } from 'ts-log';
 import { oneLine } from 'common-tags';
 
-import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
+import MessageType from '../../types/ocpp/type';
 import { SessionService } from '../session';
+import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { InboundMessage, OutboundMessage } from '../message';
 import { InboundCall } from '../call';
 import { OutboundCallError } from '../callerror';
-import MessageType from '../../types/ocpp/type';
 
 class InboundMessageSynchronicityHandler extends InboundMessageHandler {
   private sessionService;

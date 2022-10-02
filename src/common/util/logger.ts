@@ -1,5 +1,5 @@
-import winston, { format, transports } from 'winston';
 import { Logger } from 'ts-log';
+import winston, { format, transports } from 'winston';
 import pick from 'lodash.pick';
 
 import OcppMessage from '../message';

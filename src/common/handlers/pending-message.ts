@@ -1,6 +1,6 @@
-import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { SessionService } from '../session';
 import { InboundMessage, OutboundMessage } from '../message';
+import { InboundMessageHandler, OutboundMessageHandler } from '../handler';
 import { InboundCall, OutboundCall } from '../call';
 
 class InboundPendingMessageHandler extends InboundMessageHandler {

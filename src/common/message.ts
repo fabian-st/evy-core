@@ -1,5 +1,5 @@
-import MessageType from '../types/ocpp/type';
 import { Client } from './session';
+import MessageType from '../types/ocpp/type';
 import { InboundMessageHandler, ResponseHandler } from './handler';
 
 type MessageValue =

@@ -1,12 +1,12 @@
 import { Client } from './session';
 import MessageType from '../types/ocpp/type';
 import OcppAction from '../types/ocpp/action';
-import { InboundCallResult, OutboundCallResult } from './callresult';
 import OcppMessage, {
-  Payload,
   RespondableMessage,
   ResultingMessage,
+  Payload,
 } from './message';
+import { InboundCallResult, OutboundCallResult } from './callresult';
 import { InboundMessageHandler, ResponseHandler } from './handler';
 
 interface Call<

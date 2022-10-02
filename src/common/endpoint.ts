@@ -1,9 +1,5 @@
-import https, {
-  Server as HTTPSServer,
-  ServerOptions as HTTPSOptions,
-} from 'https';
-
-import http, { Server as HTTPServer, ServerOptions as HTTPOptions } from 'http';
+import http, { Server as HttpServer, ServerOptions } from 'http';
+import https from 'https';
 import { EventEmitter } from 'events';
 import TypedEmitter from 'typed-emitter';
 import { Logger } from 'ts-log';
@@ -11,16 +7,14 @@ import { oneLine } from 'common-tags';
 import merge from 'lodash.merge';
 
 import winstonLogger from './util/logger';
-import Session, { Client, SessionService } from './session';
+import Session, { SessionService, Client } from './session';
 import LocalSessionService from './services/session-local';
+import * as Handlers from './handlers';
+import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
+import OcppAction, { OcppActions } from '../types/ocpp/action';
 import MessageType from '../types/ocpp/type';
 import { InboundMessage, OutboundMessage } from './message';
 import { OutboundCallError } from './callerror';
-import OcppAction, { OcppActions } from '../types/ocpp/action';
-import * as Handlers from './handlers';
-
-import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
-
 import {
   AsyncHandler,
   AuthenticationHandler,
@@ -33,12 +27,12 @@ type EndpointOptions = {
   port?: number;
   hostname?: string;
   https?: boolean;
-  httpOptions?: HTTPOptions | HTTPSOptions;
   protocols?: Readonly<ProtocolVersion[]>;
   actionsAllowed?: Readonly<OcppAction[]>;
   maxConnections?: number;
   messageTimeout?: number;
   sessionTimeout?: number;
+  httpServerOptions?: ServerOptions;
 };
 
 type EndpointEvents = {
@@ -59,7 +53,7 @@ abstract class OcppEndpoint<
 > extends (EventEmitter as new () => TypedEmitter<EndpointEvents>) {
   protected _config: TConfig;
 
-  protected httpServer: HTTPServer | HTTPSServer;
+  protected httpServer: HttpServer;
   protected sessionService: SessionService;
   protected logger: Logger;
   protected authenticationHandlers: AuthenticationHandler[];
@@ -82,8 +76,8 @@ abstract class OcppEndpoint<
     this._config = merge(this.defaultConfig, config);
 
     this.httpServer = this.config.https
-      ? https.createServer(this.config.httpOptions)
-      : http.createServer(this.config.httpOptions);
+      ? https.createServer(this.config.httpServerOptions)
+      : http.createServer(this.config.httpServerOptions);
     this.httpServer.on('error', this.onHttpError);
 
     this.sessionService = sessionService;
@@ -110,20 +104,16 @@ abstract class OcppEndpoint<
     ]);
   }
 
-  protected get defaultHttpOptions() {
-    return {} as HTTPOptions;
-  }
-
   protected get defaultConfig() {
     return {
       port: process.env.NODE_ENV === 'development' ? 8080 : 80,
       hostname: 'localhost',
-      httpOptions: this.defaultHttpOptions,
       protocols: ProtocolVersions,
       actionsAllowed: OcppActions,
       maxConnections: 511,
       messageTimeout: 30000,
       sessionTimeout: 60000,
+      httpServerOptions: {},
     } as EndpointOptions;
   }
 

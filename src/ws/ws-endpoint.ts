@@ -1,13 +1,12 @@
-import { Logger } from 'ts-log';
-
+import { IncomingMessage as HttpRequest, STATUS_CODES } from 'http';
+import { WebSocket, Server as WsServer, ServerOptions } from 'ws';
 import path from 'path';
-import { Duplex } from 'stream';
 import { promises as fsPromises } from 'fs';
-import { IncomingMessage as HTTPRequest, STATUS_CODES } from 'http';
-import { WebSocket, Server as WSServer, ServerOptions as WSOptions } from 'ws';
-import { validate as validateJsonSchema } from 'jsonschema';
-import { oneLine, oneLineInlineLists } from 'common-tags';
+import { Duplex } from 'stream';
 import { randomBytes } from 'crypto';
+import { Logger } from 'ts-log';
+import { oneLine, oneLineInlineLists } from 'common-tags';
+import { validate as validateJsonSchema } from 'jsonschema';
 import basicAuth from 'basic-auth';
 import merge from 'lodash.merge';
 
@@ -20,7 +19,6 @@ import { InboundCallError, OutboundCallError } from '../common/callerror';
 import ProtocolVersion, { ProtocolVersions } from '../types/ocpp/version';
 import MessageType from '../types/ocpp/type';
 import OcppAction from '../types/ocpp/action';
-
 import {
   InboundMessageHandler,
   AuthenticationHandler,
@@ -29,7 +27,7 @@ import {
 } from '../common/handler';
 
 type WsOptions = EndpointOptions & {
-  wsServerOptions?: WSOptions;
+  wsServerOptions?: ServerOptions;
   route?: string;
   protocols?: Readonly<ProtocolVersion[]>;
   basicAuth?: boolean;
@@ -39,7 +37,7 @@ type WsOptions = EndpointOptions & {
 };
 
 class WsEndpoint extends OcppEndpoint<WsOptions> {
-  protected wsServer: WSServer;
+  protected wsServer: WsServer;
   protected requestSchemas: Map<OcppAction, Record<string, any>>;
   protected responseSchemas: Map<OcppAction, Record<string, any>>;
 
@@ -59,7 +57,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
       sessionService,
       logger
     );
-    this.wsServer = new WSServer(this.config.wsServerOptions);
+    this.wsServer = new WsServer(this.config.wsServerOptions);
     this.httpServer.on('upgrade', this.onHttpUpgrade);
     this.wsServer.on('connection', this.onWsConnected);
 
@@ -175,7 +173,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
   }
 
   protected onHttpUpgrade = (
-    request: HTTPRequest,
+    request: HttpRequest,
     socket: Duplex,
     head: Buffer
   ) => {
@@ -245,7 +243,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
     this.onAuthenticationAttempt(authRequest);
   };
 
-  protected parseUpgradeRequest(request: HTTPRequest) {
+  protected parseUpgradeRequest(request: HttpRequest) {
     const requestPath = path.parse(request.url);
     const clientId = requestPath.base;
 
@@ -302,7 +300,7 @@ class WsEndpoint extends OcppEndpoint<WsOptions> {
 
   protected onWsConnected = (
     ws: WebSocket,
-    request: HTTPRequest,
+    request: HttpRequest,
     client: Client
   ) => {
     ws.on('message', async (data, isBinary) => {

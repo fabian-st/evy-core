@@ -1,5 +1,5 @@
-import { InboundCall, OutboundCall } from './call';
 import ProtocolVersion from '../types/ocpp/version';
+import { InboundCall, OutboundCall } from './call';
 
 class Session {
   private _isActiveHandler: () => boolean;
